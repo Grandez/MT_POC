@@ -16,6 +16,10 @@
         <module>02_simple</module>
         <module>03_matrix</module>
         <module>MTFuture</module>
+        <module>04_db_thread</module>
+        <module>MTLatchDB</module>
+        <module>05_db_chunk</module>
+        <module>06_db_xa</module>
     </modules>
 
     <properties>
