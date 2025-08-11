@@ -29,7 +29,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.spring.boot>2.7.18</version.spring.boot>
+        <version.spring>2.7.18</version.spring>
         <version.mariadb>2.7.12</version.mariadb>
     </properties>
 
@@ -38,18 +38,34 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
-                <version>${version.spring.boot}</version>
+                <version>${version.spring}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
-                <version>${version.spring.boot}</version>
+                <version>${version.spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${version.spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.persistence</groupId>
+                <artifactId>jakarta.persistence-api</artifactId>
+                <version>2.2.3</version>
             </dependency>
             <dependency>
                 <groupId>org.mariadb.jdbc</groupId>
                 <artifactId>mariadb-java-client</artifactId>
                 <version>${version.mariadb}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.sdp.poc.threading</groupId>
+                <artifactId>10_db_mariadb</artifactId>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

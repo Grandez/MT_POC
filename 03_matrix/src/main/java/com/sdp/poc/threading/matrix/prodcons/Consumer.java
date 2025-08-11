@@ -1,6 +1,6 @@
 package com.sdp.poc.threading.matrix.prodcons;
 
-import com.sdp.poc.threading.base.otros.Operacion;
+import com.sdp.base.otros.Operacion;
 import com.sdp.poc.threading.matrix.core.CtxMatrix;
 import com.sdp.poc.threading.matrix.core.Matrix;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;

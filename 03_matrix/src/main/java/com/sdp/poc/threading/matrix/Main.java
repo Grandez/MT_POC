@@ -1,54 +1,41 @@
 package com.sdp.poc.threading.matrix;
 
-import com.sdp.poc.threading.base.otros.Operacion;
-import com.sdp.poc.threading.base.parameters.CLP;
-import com.sdp.poc.threading.base.parameters.CLP_Parameter;
-import com.sdp.poc.threading.base.parameters.CLP_TYPE;
-import com.sdp.poc.threading.base.parameters.Props;
-import com.sdp.poc.threading.base.MainBase;
-import com.sdp.poc.threading.base.logging.QLoggerProd;
-import com.sdp.poc.threading.base.mask.RC;
+import com.sdp.base.parameters.CLP;
+import com.sdp.base.parameters.CLP_Parameter;
+import com.sdp.base.parameters.CLP_TYPE;
+import com.sdp.base.parameters.Props;
+import com.sdp.base.logging.QLoggerProd;
+import com.sdp.base.mask.RC;
 import com.sdp.poc.threading.matrix.core.CtxMatrix;
 import com.sdp.poc.threading.matrix.core.Matrix;
 import com.sdp.poc.threading.matrix.core.TYPES;
 import com.sdp.poc.threading.matrix.prodcons.Consumer;
 import com.sdp.poc.threading.matrix.prodcons.Productor;
 import com.sdp.poc.threading.matrix.tools.MatrixBuilder;
+import com.sdp.poc.threading.mtlatch.base.MainMT;
 import com.sdp.poc.threading.mtlatch.core.Motor;
 
 import java.util.*;
 
 import static java.lang.System.out;
 
-public class Main extends MainBase {
-    private CtxMatrix ctx = CtxMatrix.getInstance();;
+public class Main extends MainMT {
+    private CtxMatrix ctx = CtxMatrix.getInstance();
     private QLoggerProd logger;
 
     public static void main(String[] args) {
-        (new Main()).run(args);
-    }
-    private void run(String[] args) {
-        List<Matrix> matrices;
-        try {
-            appInit("matrix", ctx, args);
-            Motor motor = new Motor(ctx);
-            for (Matrix m : creaMatrices()) {
-                m.split(); // Fuerza a crear los arrays rows y cols
-                ctx.setMatrix(m);
-                motor.run(Productor.class, Consumer.class);
-                ctx.getResult().print("Result:");
-            }
-        } catch (SecurityException se) {
-            ctx.rc |= RC.INTERRUPTED;
-            System.err.println("Control-c pulsado");
-        } catch (Exception se) {
-            ctx.rc |= RC.CRITICAL;
-            System.err.println(se.getLocalizedMessage());
-        } finally {
-            appEnd();
-        }
+        (new Main()).run("matrix", args);
     }
 
+    @Override
+    protected void execute() {
+        for (Matrix m : creaMatrices()) {
+            m.split(); // Fuerza a crear los arrays rows y cols
+            ctx.setMatrix(m);
+            motor.run(Productor.class, Consumer.class);
+            ctx.getResult().print("Result:");
+        }
+    }
     private List<Matrix> creaMatrices() {
         MatrixBuilder builder = new MatrixBuilder();
         List<Matrix> lista = new ArrayList<>();
