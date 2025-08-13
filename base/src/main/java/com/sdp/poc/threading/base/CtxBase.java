@@ -36,8 +36,8 @@ public class CtxBase { // implements ICABase {
     protected Props props;
     protected Props customProps = new Props();
 
-    private static class CABaseInner    { private static final CtxBase INSTANCE = new CtxBase(); }
-    public  static CtxBase getInstance() { return CtxBase.CABaseInner.INSTANCE; }
+    private static class ctxBaseInner { private static final CtxBase INSTANCE = new CtxBase(); }
+    public  static CtxBase getInstance() { return ctxBaseInner.INSTANCE; }
 
 
     public String getAppName()  { return appName; }

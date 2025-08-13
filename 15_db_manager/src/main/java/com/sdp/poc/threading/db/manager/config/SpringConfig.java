@@ -9,20 +9,20 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
-@Configuration
-@EnableTransactionManagement
-@ComponentScan(basePackages = {
-        "com.sdp.poc"
-})
-public class SpringConfig {
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-        emf.setDataSource(dataSource);
-        emf.setPackagesToScan("com.sdp.poc.threading.database.entity");
-        emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        return emf;
-    }
-
-}
+//@Configuration
+//@EnableTransactionManagement
+//@ComponentScan(basePackages = {
+//        "com.sdp.poc.threading"
+//})
+//public class SpringConfig {
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+//        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+//        emf.setDataSource(dataSource);
+//        emf.setPackagesToScan("com.sdp.poc.threading.database.entity");
+//        emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+//        return emf;
+//    }
+//
+//}
 

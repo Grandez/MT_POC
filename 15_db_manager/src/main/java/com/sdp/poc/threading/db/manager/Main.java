@@ -1,11 +1,8 @@
 package com.sdp.poc.threading.db.manager;
 
-import com.sdp.base.parameters.CLP;
-import com.sdp.base.parameters.CLP_Parameter;
-import com.sdp.base.parameters.Props;
-import com.sdp.base.parameters.CLP_TYPE;
+import com.sdp.poc.threading.base.parameters.*;
 
-import com.sdp.base.logging.QLoggerProd;
+import com.sdp.poc.threading.base.logging.QLoggerProd;
 import com.sdp.poc.threading.db.manager.config.ACTION;
 import com.sdp.poc.threading.db.manager.core.CtxDBManager;
 import com.sdp.poc.threading.db.manager.prodcons.Consumer;
@@ -15,6 +12,7 @@ import com.sdp.poc.threading.mtlatch.base.MainMT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,6 +42,8 @@ public class Main extends MainMT implements ApplicationRunner {
     protected void execute() {
         // Init y reset no son multihilo
         // Loader si
+        AnnotationConfigApplicationContext app = ctx.getEmf();
+        System.out.println(app.getApplicationName());
         try {
             switch (ctx.getAction()) {
                 case INIT: initializer.initialize(); break;
@@ -64,6 +64,7 @@ public class Main extends MainMT implements ApplicationRunner {
 
         options.put("threads", new CLP_Parameter("threads", CLP_TYPE.PINT));
         options.put("timeout", new CLP_Parameter("timeout", CLP_TYPE.PINT));
+        options.put("chunk",   new CLP_Parameter("chunk",   CLP_TYPE.PINT));
         options.put("rows",    new CLP_Parameter("rows",    CLP_TYPE.PINT));
         options.put("init",    new CLP_Parameter("init",    CLP_TYPE.BOOL));
         options.put("reset",   new CLP_Parameter("reset",   CLP_TYPE.BOOL));
@@ -94,6 +95,7 @@ public class Main extends MainMT implements ApplicationRunner {
         out.println("\t   --rows    n - Numero de registros a generar en miles");
         out.println("\t   --threads n - Numero de hilos");
         out.println("\t   --timeout n - Maximo tiempo elapsed en minutos");
+        out.println("\t   --chunk   n - Numero de operaciones para persistir la transaccion");
         System.exit(0);
     }
 

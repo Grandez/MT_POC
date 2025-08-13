@@ -15,7 +15,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.sdp.poc</groupId>
+            <groupId>com.sdp.poc.threading</groupId>
             <artifactId>base</artifactId>
             <version>${version.poc}</version>
         </dependency>
@@ -40,16 +40,18 @@
         <dependency>
             <groupId>com.sdp.poc.threading</groupId>
             <artifactId>10_database</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sdp.poc.threading</groupId>
-            <artifactId>11_mariadb</artifactId>
+            <version>${version.poc}</version>
         </dependency>
 
         <!-- Database Drivers -->
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sdp.poc.threading</groupId>
+            <artifactId>MTLatchDB</artifactId>
+            <version>${version.poc}</version>
         </dependency>
 
     </dependencies>
@@ -67,7 +69,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <finalName>db_manager_fat</finalName>
+                    <finalName>15_db_manager</finalName>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
