@@ -1,5 +1,6 @@
 package com.sdp.poc.threading.matrix.prodcons;
 
+import com.sdp.poc.threading.base.QObject;
 import com.sdp.poc.threading.matrix.core.CtxMatrix;
 import com.sdp.poc.threading.matrix.core.Matrix;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
@@ -16,13 +17,13 @@ public class Productor implements IMTProducer {
         m.print("Source:");
     }
     @Override
-    public Long producir() {
+    public QObject producir() {
         if (++c == m.getNumCols()) {
             r++;
             c = 0;
         }
         if (r == m.getNumRows()) return null;
         String sid = String.format("%04d%04d", r, c);
-        return Long.parseLong(sid);
+        return new QObject(Long.parseLong(sid));
     }
 }

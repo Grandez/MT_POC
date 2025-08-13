@@ -1,6 +1,7 @@
 package com.sdp.poc.threading.matrix.prodcons;
 
-import com.sdp.base.otros.Operacion;
+import com.sdp.poc.threading.base.QObject;
+import com.sdp.poc.threading.base.otros.Operacion;
 import com.sdp.poc.threading.matrix.core.CtxMatrix;
 import com.sdp.poc.threading.matrix.core.Matrix;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;
@@ -15,11 +16,11 @@ public class Consumer implements IMTConsumer {
         m = ctx.getMatrix();
     }
 
-    public void consumir(long msg) {
+    public void consumir(QObject msg) {
 //        System.out.println(Thread.currentThread().getName() + " - Recibe " + msg);
 
-        int row = (int) msg / 10000;
-        int col = (int) msg % 10000;
+        int row = Math.toIntExact(msg.id / 10000);
+        int col = Math.toIntExact(msg.id % 10000);
         int val = 0;
         int[] r = m.getRow(row);
         int[] c = m.getCol(col);

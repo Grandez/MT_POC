@@ -1,8 +1,9 @@
 package com.sdp.poc.threading.mtlatch.base;
 
-import com.sdp.base.MainBase;
-import com.sdp.base.mask.RC;
-import com.sdp.base.parameters.Props;
+import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.MainBase;
+import com.sdp.poc.threading.base.mask.RC;
+import com.sdp.poc.threading.base.parameters.Props;
 import com.sdp.poc.threading.mtlatch.core.Motor;
 
 public abstract class MainMT extends MainBase {
@@ -14,7 +15,7 @@ public abstract class MainMT extends MainBase {
     protected abstract void showHelp();
     protected  abstract void execute();
     protected  Motor motor;
-    public void run(String name, String[] args) {
+    public void run(String name, CtxBase ctx, String[] args) {
         try {
             appInit(name, ctx, args);
             motor = new Motor(ctx);
@@ -28,6 +29,5 @@ public abstract class MainMT extends MainBase {
         } finally {
             appEnd();
         }
-
     }
 }

@@ -1,7 +1,8 @@
 package com.sdp.poc.threading.mtlatch.core;
 
-import com.sdp.base.CtxBase;
-import com.sdp.base.logging.CLogger;
+import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.QObject;
+import com.sdp.poc.threading.base.logging.CLogger;
 import com.sdp.poc.threading.mtlatch.base.ThreadBase;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
 
@@ -16,7 +17,7 @@ public class MTProducer<T> extends ThreadBase implements Runnable {
     }
 
     public void run() {
-        Long msg;
+        QObject msg;
         setThreadName("Prod");
 
         CLogger.info("Iniciando hilo " + getName());
@@ -28,7 +29,7 @@ public class MTProducer<T> extends ThreadBase implements Runnable {
            msg = producer.producir();
         }
         // Notificar que acaben
-        for (long l = 0; l < ctx.getNumThreads(); l++) ctx.getQueue().put(Long.MAX_VALUE);
+        for (long l = 0; l < ctx.getNumThreads(); l++) ctx.getQueue().put(new QObject(Long.MAX_VALUE));
         ctx.getLatch().countDown();
     }
 

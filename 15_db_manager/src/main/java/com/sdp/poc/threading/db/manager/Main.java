@@ -6,8 +6,13 @@ import com.sdp.base.parameters.Props;
 import com.sdp.base.parameters.CLP_TYPE;
 
 import com.sdp.base.logging.QLoggerProd;
+import com.sdp.poc.threading.db.manager.config.ACTION;
 import com.sdp.poc.threading.db.manager.core.CtxDBManager;
+import com.sdp.poc.threading.db.manager.prodcons.Consumer;
+import com.sdp.poc.threading.db.manager.prodcons.Producer;
+import com.sdp.poc.threading.db.manager.services.*;
 import com.sdp.poc.threading.mtlatch.base.MainMT;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -18,8 +23,13 @@ import static java.lang.System.out;
 
 @SpringBootApplication
 public class Main extends MainMT implements ApplicationRunner {
-    private CtxDBManager ctx = CtxDBManager.getInstance();;
+    private CtxDBManager ctx = CtxDBManager.getInstance();
     private QLoggerProd logger;
+
+    @Autowired
+    Initializer initializer;
+    @Autowired
+    Loader loader;
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
@@ -27,7 +37,22 @@ public class Main extends MainMT implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        appInit("matrix", ctx, args.getSourceArgs());
+        run("dbmanager", ctx, args.getSourceArgs());
+    }
+
+    @Override
+    protected void execute() {
+        // Init y reset no son multihilo
+        // Loader si
+        try {
+            switch (ctx.getAction()) {
+                case INIT: initializer.initialize(); break;
+                case RESET: break;
+                case LOAD:  motor.run(Producer.class, Consumer.class); break;
+            }
+        } catch (Throwable t) {
+            System.err.println("Para");
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -51,6 +76,11 @@ public class Main extends MainMT implements ApplicationRunner {
     protected void loadConfig() {
         // No hay fichero de propiedades. solo linea de comandos
         Props props = ctx.getCommandLine();
+
+        if (props.getBoolean("init", false)) ctx.setAction(ACTION.INIT);
+        if (props.getBoolean("reset",false)) ctx.setAction(ACTION.RESET);
+        if (props.getBoolean("load", false)) ctx.setAction(ACTION.LOAD);
+
 //        ctx.setRows(props.getInteger("rows", ctx.getRows()));
     }
     protected void showHelp() {

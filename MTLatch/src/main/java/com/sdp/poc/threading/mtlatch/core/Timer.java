@@ -1,7 +1,8 @@
 package com.sdp.poc.threading.mtlatch.core;
 
-import com.sdp.base.CtxBase;
-import com.sdp.base.logging.CLogger;
+import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.QObject;
+import com.sdp.poc.threading.base.logging.CLogger;
 import com.sdp.poc.threading.mtlatch.base.ThreadBase;
 
 /**
@@ -25,7 +26,7 @@ public class Timer extends ThreadBase {
 //         Thread.sleep(((cfg.timer * 60) - 6) * 1000);  // El hilo está durmiendo, y podría ser interrumpido
             Thread.currentThread().sleep(env.getTimeout() * 1000);  // El hilo está durmiendo, y podría ser interrumpido
             CLogger.info("Hilo de tiempo despierta ");
-            for (int l = 0; l < env.getNumThreads(); l++) env.getQueue().put(-1l); // Notificar fin hilos
+            for (int l = 0; l < env.getNumThreads(); l++) env.getQueue().put(new QObject(-1l)); // Notificar fin hilos
             thrProd.interrupt();
 //                }
         } catch (InterruptedException e) {

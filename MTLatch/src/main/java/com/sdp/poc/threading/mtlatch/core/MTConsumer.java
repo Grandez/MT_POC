@@ -1,7 +1,8 @@
 package com.sdp.poc.threading.mtlatch.core;
 
-import com.sdp.base.CtxBase;
-import com.sdp.base.logging.CLogger;
+import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.QObject;
+import com.sdp.poc.threading.base.logging.CLogger;
 import com.sdp.poc.threading.mtlatch.base.ThreadBase;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;
 
@@ -18,14 +19,14 @@ public class MTConsumer<Long> extends ThreadBase implements Runnable {
 
     @Override
     public void run() {
-        long msg;
+        QObject msg;
         boolean rc = true;
         setThreadName("cons");
         CLogger.info("Iniciando hilo " + getNombre());
         try {
             while (true) {
-                msg = (long) ctx.getQueue().take();
-                if (msg < 0 || msg == java.lang.Long.MAX_VALUE) break;
+                msg = ctx.getQueue().take();
+                if (msg.isLastMessage()) break;
                 ctx.write();
                 consumer.consumir(msg);
             }

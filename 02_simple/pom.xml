@@ -19,23 +19,22 @@
     </properties>
 
     <dependencies>
-       <dependency>
-           <groupId>com.sdp.poc</groupId>
-           <artifactId>base</artifactId>
-           <version>1.0.0</version>
-       </dependency>
-
         <dependency>
-            <groupId>com.sdp.poc</groupId>
-            <artifactId>MTLatch</artifactId>
-            <version>1.0.0</version>
+            <groupId>com.sdp.poc.threading</groupId>
+            <artifactId>base</artifactId>
+            <version>${version.poc}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.sdp.poc.threading</groupId>
+            <artifactId>MTLatch</artifactId>
+            <version>${version.poc}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <!-- JAR NO FAT, necesita el ClassPath -->
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -49,6 +48,7 @@
                     </archive>
                 </configuration>
             </plugin>
+-->
 
             <!-- JAR FAT, NO necesita el ClassPath -->
             <plugin>

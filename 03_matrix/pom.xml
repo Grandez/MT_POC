@@ -12,29 +12,17 @@
     <artifactId>03_matrix</artifactId>
     <packaging>jar</packaging>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <dependency>
-            <groupId>com.sdp.poc</groupId>
+            <groupId>com.sdp.poc.threading</groupId>
             <artifactId>base</artifactId>
-            <version>1.0.0</version>
+            <version>${version.poc}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.sdp.poc</groupId>
-            <artifactId>MTLatch</artifactId>
-            <version>1.0.0</version>
-        </dependency>
         <dependency>
             <groupId>com.sdp.poc.threading</groupId>
             <artifactId>MTLatch</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
+            <version>${version.poc}</version>
         </dependency>
 
     </dependencies>
@@ -64,7 +52,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <finalName>03_matrix_fat</finalName>
+                    <finalName>03_matrix</finalName>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>

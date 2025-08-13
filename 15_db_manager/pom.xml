@@ -17,9 +17,16 @@
         <dependency>
             <groupId>com.sdp.poc</groupId>
             <artifactId>base</artifactId>
-            <version>1.0.0</version>
+            <version>${version.poc}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.sdp.poc.threading</groupId>
+            <artifactId>MTLatch</artifactId>
+            <version>${version.poc}</version>
+        </dependency>
+
+        <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -28,25 +35,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+        <!-- Database -->
         <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
+            <groupId>com.sdp.poc.threading</groupId>
+            <artifactId>10_database</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
+            <groupId>com.sdp.poc.threading</groupId>
+            <artifactId>11_mariadb</artifactId>
         </dependency>
 
+        <!-- Database Drivers -->
         <dependency>
-            <groupId>com.sdp.poc.threading</groupId>
-            <artifactId>10_db_mariadb</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sdp.poc.threading</groupId>
-            <artifactId>MTLatch</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
         </dependency>
 
     </dependencies>
@@ -64,7 +67,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <finalName>03_matrix_fat</finalName>
+                    <finalName>db_manager_fat</finalName>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>

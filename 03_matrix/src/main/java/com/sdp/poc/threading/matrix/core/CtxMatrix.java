@@ -8,7 +8,7 @@
  */
 package com.sdp.poc.threading.matrix.core;
 
-import com.sdp.base.CtxBase;
+import com.sdp.poc.threading.base.CtxBase;
 
 public class CtxMatrix extends CtxBase {
     Matrix matrix;

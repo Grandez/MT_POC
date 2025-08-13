@@ -14,11 +14,11 @@ package com.sdp.poc.threading.mtfuture.core;
  *
  */
 
-import com.sdp.base.CtxBase;
-import com.sdp.base.parameters.Props;
+import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.parameters.Props;
 import com.sdp.poc.threading.mtfuture.interfaces.IMTConsumer;
 import com.sdp.poc.threading.mtfuture.interfaces.IMTProducer;
-import com.sdp.base.logging.QLoggerProd;
+import com.sdp.poc.threading.base.logging.QLoggerProd;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

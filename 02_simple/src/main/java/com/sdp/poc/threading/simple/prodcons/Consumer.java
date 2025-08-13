@@ -1,5 +1,6 @@
 package com.sdp.poc.threading.simple.prodcons;
 
+import com.sdp.poc.threading.base.QObject;
 import com.sdp.poc.threading.base.otros.Operacion;
 import com.sdp.poc.threading.base.system.Rand;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;
@@ -12,7 +13,7 @@ public class Consumer implements IMTConsumer {
         ctx = CtxSimple.getInstance();
     }
 
-    public void consumir(long msg) {
+    public void consumir(QObject msg) {
         Operacion op = new Operacion();
         Rand r = new Rand(1,100);
         op.sumar(r.next(), r.next());

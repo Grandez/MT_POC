@@ -11,10 +11,12 @@
 
     <artifactId>MTLatchDB</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.sdp.poc.threading</groupId>
+            <artifactId>MTLatch</artifactId>
+            <version>${version.poc}</version>
+        </dependency>
+    </dependencies>
 
 </project>

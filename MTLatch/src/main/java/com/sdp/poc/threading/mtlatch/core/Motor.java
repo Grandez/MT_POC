@@ -14,11 +14,11 @@ package com.sdp.poc.threading.mtlatch.core;
  *
  */
 
-import com.sdp.base.CtxBase;
-import com.sdp.base.parameters.Props;
+import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.parameters.Props;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
-import com.sdp.base.logging.QLoggerProd;
+import com.sdp.poc.threading.base.logging.QLoggerProd;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -35,7 +35,7 @@ public class Motor {
     public Motor(String file, String label) {
         this(file, label, null);
     }
-    public Motor(CtxBase ca)                { this(null,null, ca);    }
+    public Motor(CtxBase ca)                { this("NONE",null, ca);    }
     public Motor(String file, CtxBase ca)   { this(file,null, ca);    }
 
     /**
