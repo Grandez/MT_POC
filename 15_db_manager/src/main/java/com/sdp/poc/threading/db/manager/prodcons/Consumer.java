@@ -1,6 +1,8 @@
 package com.sdp.poc.threading.db.manager.prodcons;
 
 import com.sdp.poc.threading.base.QObject;
+import com.sdp.poc.threading.base.logging.Logger;
+import com.sdp.poc.threading.base.logging.QLogger;
 import com.sdp.poc.threading.db.manager.config.CtxDBManagerThread;
 import com.sdp.poc.threading.db.manager.core.QItem;
 import com.sdp.poc.threading.db.manager.loader.LoadMaster;
@@ -9,10 +11,12 @@ import org.hibernate.Session;
 
 public class Consumer implements IMTDBConsumer {
     CtxDBManagerThread ctx;
-    LoadMaster master;
+    LoadMaster         master;
+    Logger            logger;
     public Consumer() {
-        ctx = new CtxDBManagerThread();
+        ctx    = new CtxDBManagerThread();
         master = new LoadMaster(ctx);
+        logger =  QLogger.getQLogger(ctx.getCtxBase());
     }
 
     public void consumir(QObject msg) {

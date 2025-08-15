@@ -4,8 +4,6 @@ import com.sdp.poc.threading.base.QObject;
 import com.sdp.poc.threading.base.system.Rand;
 import com.sdp.poc.threading.database.dao.Slave1Dao;
 import com.sdp.poc.threading.database.dao.Slave2Dao;
-import com.sdp.poc.threading.database.entity.Slave1;
-import com.sdp.poc.threading.database.entity.Slave2;
 import com.sdp.poc.threading.db.manager.config.CtxDBManagerThread;
 import com.sdp.poc.threading.db.manager.core.QItem;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
@@ -15,21 +13,21 @@ import org.hibernate.Session;
 public class Producer implements IMTProducer {
     CtxDBManagerThread ctx;
     Session session;
+    long    id;
+    Rand    rnd;
+
     long rows    = 100000;
     long current =      0;
-    long id;
-    Rand rnd;
 
     public Producer() {
         ctx = new CtxDBManagerThread();
-        rows = ctx.getRows() * 10;
+        rows = ctx.getRows() * 1000;
         rnd = new Rand(0,5);
         session = ctx.getSession();
         id = getLastId();
     }
     @Override
     public QObject producir() {
-        System.out.println("Produce " + id);
         if (++current > rows) return null;
         QItem item = new QItem(id, rnd.next(), rnd.next());
         id = item.nextId();
@@ -46,9 +44,5 @@ public class Producer implements IMTProducer {
         id = id1 > id2 ? id1 : id2;
         if (id3 > id) id = id3;
         return ++id;
-    }
-    @Override
-    protected void finalize() throws Throwable {
-        if (session != null) session.close();
     }
 }

@@ -8,7 +8,7 @@ import com.sdp.poc.threading.base.system.QueueComparator;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.PriorityBlockingQueue;
 
-public class CtxBase { // implements ICABase {
+public class CtxBase {
     private static CtxBase INSTANCE = null;
     private String appName = "NONAME";
     public  int    rc  = 0;
@@ -27,9 +27,10 @@ public class CtxBase { // implements ICABase {
     private int chunk   = 1;
 
     // Logging
-    private int logLevel   = 0;
-    private int infoLevel  = 0;
-    private int debugLevel = 0;
+    public int logLevel     = 9;
+    public int infoLevel    = 9;
+    public int debugLevel   = 9;
+    public int warningLevel = 9;
 
     public static PriorityBlockingQueue<QObject> qdat = new PriorityBlockingQueue<>(100, new QueueComparator());
     private static CountDownLatch latch;
@@ -47,8 +48,7 @@ public class CtxBase { // implements ICABase {
     }
     public  static CtxBase getInstance() { return getInstance("application"); }
     public  static CtxBase getInstance(String fileProps) {
-        if (INSTANCE == null)
-            INSTANCE = new CtxBase(fileProps);
+        if (INSTANCE == null) INSTANCE = new CtxBase(fileProps);
         return INSTANCE;
     }
 
@@ -92,10 +92,10 @@ public class CtxBase { // implements ICABase {
     public long getErr  ()       { return err; }
 
     public void  setCommandLine(Props props) { this.customProps = props; }
-    public void  setAppProps(Props props)    { this.appProps = props; }
+    public void  setAppProps(Props props)    { this.appProps    = props; }
 
     public Props getCommandLine()            { return customProps; }
-    public Props getAppProps()               { return appProps; }
+    public Props getAppProps()               { return appProps;    }
 
     protected void  loadAppConfig()             { loadAppConfig("application"); }
     protected void  loadAppConfig(String name)  {
@@ -103,14 +103,16 @@ public class CtxBase { // implements ICABase {
     }
 
     public PriorityBlockingQueue<QObject> getQueue() { return qdat; }
-    public CountDownLatch              getLatch() { return latch; }
-    public void                        setLatch(CountDownLatch latch) { this.latch = latch; }
+    public CountDownLatch                 getLatch() { return latch; }
+    public void                           setLatch(CountDownLatch latch) { this.latch = latch; }
 
-    public int getLogLevel()   { return logLevel;   }
-    public int getInfoLevel()  { return infoLevel;  }
-    public int getDebugLevel() { return debugLevel; }
+    public int getLogLevel()     { return logLevel;     }
+    public int getInfoLevel()    { return infoLevel;    }
+    public int getDebugLevel()   { return debugLevel;   }
+    public int getWarningLevel() { return warningLevel; }
 
-    public void setLogLevel(int logLevel)     { this.logLevel = logLevel;     }
-    public void setInfoLevel(int infoLevel)   { this.infoLevel = infoLevel;   }
-    public void setDebugLevel(int debugLevel) { this.debugLevel = debugLevel; }
+    public void setLogLevel    (int level) { this.logLevel     = level; }
+    public void setInfoLevel   (int level) { this.infoLevel    = level; }
+    public void setDebugLevel  (int level) { this.debugLevel   = level; }
+    public void setWarningLevel(int level) { this.warningLevel = level; }
 }

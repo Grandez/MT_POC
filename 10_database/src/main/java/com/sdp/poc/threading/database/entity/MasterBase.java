@@ -5,10 +5,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.sql.Timestamp;
 
-public class MasterBase {
-    @Id
-    @Column(name="ID")
-    Long id;
+@MappedSuperclass
+public abstract class MasterBase {
     @Column(name="ENTERO")
     Integer entero;
     @Column(name="LARGO")
@@ -26,13 +24,6 @@ public class MasterBase {
     @Column(name="LOGICO")
     Boolean logico;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Integer getEntero() {
         return entero;

@@ -4,7 +4,7 @@ import com.sdp.poc.threading.base.config.CtxBase;
 import com.sdp.poc.threading.base.datetime.Time;
 import com.sdp.poc.threading.base.parameters.Props;
 import com.sdp.poc.threading.base.logging.CLogger;
-import com.sdp.poc.threading.base.logging.QLogger;
+import com.sdp.poc.threading.base.logging.QLoggerThread;
 import com.sdp.poc.threading.base.logging.QLoggerProd;
 import com.sdp.poc.threading.base.system.Shutdown;
 
@@ -21,13 +21,13 @@ public abstract class MainBase {
 
     protected void appInit(String name, CtxBase ctx, String[] args) {
         Shutdown.setHook();
-        QLogger.start(name);
+        QLoggerThread.start(name);
 
         this.ctx = ctx;
         ctx.setAppName(name);
         ctx.setCommandLine(parseParms(args));
 
-        logger = QLogger.getLogger(ctx);
+        logger = QLoggerThread.getLogger(ctx);
         loadConfig();
     }
 
@@ -35,12 +35,12 @@ public abstract class MainBase {
         // Separamos las ejecuciones con timeout que las que no
         // Desvituarian los analisis
         String type = ctx.getTimeout() > 0 ? "SMR01000" : "SMR01001";
-        logger.msg(type, System.currentTimeMillis() - ctx.getBeg()
+        logger.info(0,type, System.currentTimeMillis() - ctx.getBeg()
                 , ctx.getRC()
                 , ctx.getInput(), ctx.getOutput(), ctx.getErrors()
                 , ctx.getNumThreads(), ctx.getChunk(), ctx.getTimeout()
         );
-        QLogger.stop();
+        QLoggerThread.stop();
         CLogger.info(String.format("RC: %2d - Elapsed: %s", ctx.getRC(),
                 Time.elapsed(System.currentTimeMillis() - ctx.getBeg(), true)));
         System.exit(ctx.getRC());

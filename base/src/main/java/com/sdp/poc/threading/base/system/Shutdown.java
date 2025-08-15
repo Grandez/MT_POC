@@ -1,6 +1,6 @@
 package com.sdp.poc.threading.base.system;
 
-import com.sdp.poc.threading.base.logging.QLogger;
+import com.sdp.poc.threading.base.logging.QLoggerThread;
 
 public class Shutdown {
     public static void setHook() {
@@ -8,7 +8,7 @@ public class Shutdown {
             @Override
             public void run() {
 
-                QLogger.stop();
+                QLoggerThread.stop();
             }
         }));
 

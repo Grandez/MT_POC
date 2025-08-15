@@ -8,18 +8,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CLogger {
-    private static CtxBase ca = null;
+    private static CtxBase ctx = null;
     public static void error(String msg, Object ... args) {
-        if (ca == null) ca = CtxBase.getInstance();
-        ca.rc |= RC.ERROR;
+        if (ctx == null) ctx = CtxBase.getInstance();
+        ctx.rc |= RC.ERROR;
         System.err.println(Color.RED_BOLD.getColor() + String.format(msg, args) + Color.RESET.getColor());
     }
     public static void debug(String msg) {
         print(msg);
     }
     public static void warning(String msg, Object ...args) {
-        if (ca == null) ca = CtxBase.getInstance();
-        ca.rc |= RC.WARNING;
+        if (ctx == null) ctx = CtxBase.getInstance();
+        ctx.rc |= RC.WARNING;
         print(Color.BLUE_BOLD, String.format(msg, args));
     }
     public static void info(String msg) {

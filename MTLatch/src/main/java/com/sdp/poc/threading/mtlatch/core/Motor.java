@@ -47,8 +47,8 @@ public class Motor {
      */
     protected Motor(String fConfig, String label, CtxBase ctx) {
         this.ctx = ctx;
-        loadPropsData(fConfig, label);
-        loadPropsData(ctx.getCommandLine(), null);
+        loadPropsFile(fConfig, label);
+        loadPropsCLI(ctx.getCommandLine());
         ctx.setAppProps(Props.load(getFileProperties(fConfig)));
     }
 
@@ -100,16 +100,24 @@ public class Motor {
         thr.start();
         return thr;
     }
-    private void loadPropsData(String fname, String prfx) {
-        loadPropsData(Props.load(getFileProperties(fname)), prfx);
-    }
-    private void loadPropsData(Props props, String prfx) {
+    private void loadPropsFile(String fname, String prfx) {
+        String p = "mt.";
+        Props props = Props.load(getFileProperties(fname));
         if (props == null) return;
-        String p = prfx == null ? "" : prfx + ".";
+
+        if (prfx != null) p = p + prfx + ".";
         ctx.setNumThreads(props.getInteger(p + "threads", ctx.getNumThreads()));
-        ctx.setTimeout(props.getInteger(p + "timeout", ctx.getTimeout()));
-        ctx.setChunk(props.getInteger(p + "chunk",   ctx.getChunk()));
+        ctx.setTimeout(props.getInteger   (p + "timeout", ctx.getTimeout()));
+        ctx.setChunk(props.getInteger     (p + "chunk",   ctx.getChunk()));
     }
+    private void loadPropsCLI(Props props) {
+        if (props == null) return;
+
+        ctx.setNumThreads(props.getInteger("threads", ctx.getNumThreads()));
+        ctx.setTimeout(props.getInteger   ("timeout", ctx.getTimeout()));
+        ctx.setChunk(props.getInteger     ("chunk",   ctx.getChunk()));
+    }
+
     private String getFileProperties (String fileProps) {
         if (fileProps.compareToIgnoreCase("NONE") == 0) return null;
         if (fileProps == null) {

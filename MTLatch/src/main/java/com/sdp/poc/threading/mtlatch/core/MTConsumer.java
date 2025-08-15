@@ -10,6 +10,7 @@ public class MTConsumer<Long> extends ThreadBase implements Runnable {
 
     IMTConsumer consumer;
     CtxBase ctx;
+    int counter = 0;
     public MTConsumer(CtxBase ctx, IMTConsumer consumer) {
         super(ctx.getLatch());
         this.ctx = ctx;
@@ -27,12 +28,13 @@ public class MTConsumer<Long> extends ThreadBase implements Runnable {
             while (true) {
                 msg = ctx.getQueue().take();
                 if (msg.isLastMessage()) break;
-                ctx.write();
+                counter++;
                 consumer.consumir(msg);
             }
         } catch (InterruptedException e) {
             CLogger.info(" Interrumpido");
         }
+        ctx.write(counter);
         ctx.getLatch().countDown();
     }
     protected void setThreadName () { setThreadName(this.getClass().getSimpleName()); }

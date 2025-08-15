@@ -94,20 +94,4 @@ public class MotorDB  extends Motor {
         thr.start();
         return thr;
     }
-    private void loadPropsData(Props props, String prfx) {
-        if (props == null) return;
-        String p = prfx == null ? "" : prfx + ".";
-        ctx.setNumThreads(props.getInteger(p + "threads", ctx.getNumThreads()));
-        ctx.setTimeout(props.getInteger(p + "timeout", ctx.getTimeout()));
-        ctx.setChunk(props.getInteger(p + "chunk",   ctx.getChunk()));
-    }
-    private String getFileProperties (String fileProps) {
-        if (fileProps.compareToIgnoreCase("NONE") == 0) return null;
-        if (fileProps == null) {
-            String[] toks = getClass().getName().split("\\.");
-            fileProps = toks[toks.length - 3];
-        }
-        if (fileProps.indexOf('.') == -1) fileProps = fileProps + ".properties";
-        return fileProps;
-    }
 }

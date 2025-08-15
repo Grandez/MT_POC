@@ -27,17 +27,13 @@ public class Main extends MainDB { // implements ApplicationRunner {
 
     @Override
     protected void execute() {
-        // Init y reset no son multihilo
-        // Loader si
-//        AnnotationConfigApplicationContext app = ctx.getEmf();
-//        System.out.println(app.getApplicationName());
+        // Init y reset no son multihilo, Loader si
         try {
             switch (ctx.getAction()) {
-                case INIT:
-                    initializer = (Initializer) ctx.getBean(Initializer.class);
-                    initializer.initialize(); break;
                 case RESET: break;
-                case LOAD:  motor.run(Producer.class, Consumer.class); break;
+                case LOAD: motor.run(Producer.class, Consumer.class); break;
+                case INIT: initializer = (Initializer) ctx.getBean(Initializer.class);
+                           initializer.initialize(); break;
             }
         } catch (Throwable t) {
             System.err.println("Para");
@@ -64,14 +60,11 @@ public class Main extends MainDB { // implements ApplicationRunner {
     }
 
     protected void loadConfig() {
-        // No hay fichero de propiedades. solo linea de comandos
         Props props = ctx.getCommandLine();
 
         if (props.getBoolean("init", false)) ctx.setAction(ACTION.INIT);
         if (props.getBoolean("reset",false)) ctx.setAction(ACTION.RESET);
         if (props.getBoolean("load", false)) ctx.setAction(ACTION.LOAD);
-
-//        ctx.setRows(props.getInteger("rows", ctx.getRows()));
     }
     protected void showHelp() {
         out.println("POC para analisis de procesos multihilo");
