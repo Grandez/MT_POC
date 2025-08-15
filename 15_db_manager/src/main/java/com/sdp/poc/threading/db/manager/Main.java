@@ -20,9 +20,7 @@ public class Main extends MainDB { // implements ApplicationRunner {
     private static CtxDBManager ctx = CtxDBManager.getInstance();
     private QLoggerProd logger;
 
-//    @Autowired
     Initializer initializer;
-    @Autowired
     Loader loader;
 
     public static void main(String[] args) { (new Main()).run("dbmanager", ctx, args); }
@@ -35,7 +33,9 @@ public class Main extends MainDB { // implements ApplicationRunner {
 //        System.out.println(app.getApplicationName());
         try {
             switch (ctx.getAction()) {
-                case INIT: initializer.initialize(); break;
+                case INIT:
+                    initializer = (Initializer) ctx.getBean(Initializer.class);
+                    initializer.initialize(); break;
                 case RESET: break;
                 case LOAD:  motor.run(Producer.class, Consumer.class); break;
             }
