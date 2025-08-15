@@ -19,7 +19,10 @@
         <module>03_matrix</module>
         <module>10_database</module>
         <module>15_db_manager</module>
+        <module>99_sample</module>
+        <module>98_sample_base</module>
         <!--
+
                 <module>MTFuture</module>
                 <module>MTLatchDB</module>
 
@@ -43,42 +46,53 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.spring>5.3.39</version.spring>
+        <version.hibernate>5.6.15.Final</version.hibernate>
         <version.spring.data>2.7.18</version.spring.data>
-        <version.mariadb>2.7.12</version.mariadb>
+        <version.mariadb>2.7.11</version.mariadb>
+        <version.log4j>2.17.2</version.log4j>
         <version.poc>1.0.0</version.poc>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- MariaDB JDBC -->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-                <version>${version.spring.data}</version>
+                <groupId>org.mariadb.jdbc</groupId>
+                <artifactId>mariadb-java-client</artifactId>
+                <version>${version.mariadb}</version>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-jpa</artifactId>
-                <version>${version.spring.data}</version>
-            </dependency>
+            <!-- Spring Core + Context -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
                 <version>${version.spring}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-jpa</artifactId>
-                <version>${version.spring.data}</version>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-orm</artifactId>
+                <version>${version.spring}</version>
+            </dependency>
+
+            <!-- Hibernate ORM -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${version.hibernate}</version>
             </dependency>
             <dependency>
-                <groupId>jakarta.persistence</groupId>
-                <artifactId>jakarta.persistence-api</artifactId>
-                <version>2.2.3</version>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${version.log4j}</version>
             </dependency>
             <dependency>
-                <groupId>org.mariadb.jdbc</groupId>
-                <artifactId>mariadb-java-client</artifactId>
-                <version>${version.mariadb}</version>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${version.log4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-dbcp2</artifactId>
+                <version>2.9.0</version>
             </dependency>
 
             <dependency>

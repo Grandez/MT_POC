@@ -12,7 +12,8 @@ public abstract class ThreadBase extends Thread {
     protected void setThreadName (String proceso) {
         String tname = Thread.currentThread().getName();
         String[] toks = tname.split("-");
-        Thread.currentThread().setName(proceso + "-" + String.format("%03d", Integer.parseInt(toks[toks.length - 1])));
+        String n = proceso + "-" + String.format("%03d", Integer.parseInt(toks[toks.length - 1]));
+        Thread.currentThread().setName(n);
     }
     public ThreadBase() {}
     public ThreadBase(CountDownLatch latch) {

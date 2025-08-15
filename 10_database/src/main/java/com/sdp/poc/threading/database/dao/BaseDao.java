@@ -1,5 +1,7 @@
 package com.sdp.poc.threading.database.dao;
 
+import org.hibernate.Session;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -17,12 +19,10 @@ public class BaseDao {
         String sql = "DELETE FROM " + table;
         return em.createQuery(sql).executeUpdate();
     }
-    public int getLastId() {
+    public long getLastId(Session session) {
         String sql = "SELECT MAX(id) FROM " + table;
-        Object obj =  em.createQuery(sql).getSingleResult();
-        if (obj == null) return 0;
-        System.out.println(obj.toString());
-        return 0;
+        Long obj =  (Long) session.createQuery(sql).getSingleResult();
+        return (obj == null) ? 0 : obj.longValue();
     }
 
 }

@@ -2,7 +2,7 @@ package com.sdp.poc.threading.database.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 
 @Entity

@@ -1,6 +1,6 @@
 package com.sdp.poc.threading.mtlatch.base;
 
-import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.config.CtxBase;
 import com.sdp.poc.threading.base.MainBase;
 import com.sdp.poc.threading.base.mask.RC;
 import com.sdp.poc.threading.base.parameters.Props;
@@ -15,10 +15,21 @@ public abstract class MainMT extends MainBase {
     protected abstract void showHelp();
     protected  abstract void execute();
     protected  Motor motor;
+    
+    public void runCustom(String name, CtxBase ctx, String[] args, String file) {
+        runInternal(name,ctx,args,file);
+    }
+    public void runSimple(String name, CtxBase ctx, String[] args, String file) {
+        runInternal(name,ctx,args,"NONE");
+    }
+
     public void run(String name, CtxBase ctx, String[] args) {
+        runInternal(name,ctx,args,"application");
+    }
+    private void runInternal(String name, CtxBase ctx, String[] args, String fName) {
         try {
             appInit(name, ctx, args);
-            motor = new Motor(ctx);
+            motor = new Motor(ctx, fName);
             execute();
         } catch (SecurityException se) {
             ctx.rc |= RC.INTERRUPTED;
@@ -30,4 +41,5 @@ public abstract class MainMT extends MainBase {
             appEnd();
         }
     }
+
 }

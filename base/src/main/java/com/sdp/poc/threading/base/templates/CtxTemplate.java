@@ -12,7 +12,7 @@ package com.sdp.poc.threading.base.templates;
  *
  */
 
-import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.config.CtxBase;
 
 public class CtxTemplate extends CtxBase {
 

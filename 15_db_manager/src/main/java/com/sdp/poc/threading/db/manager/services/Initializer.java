@@ -1,19 +1,16 @@
 package com.sdp.poc.threading.db.manager.services;
 
 import com.sdp.poc.threading.database.dao.*;
-import com.sdp.poc.threading.db.manager.core.CtxDBManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+// import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
 
-@Service
+//  @Service
 public class Initializer {
-    private CtxDBManager ctx = CtxDBManager.getInstance();
+//    private CtxDBManager ctx = CtxDBManager.getInstance();
 
     @PersistenceUnit
     private EntityManagerFactory emf;
@@ -26,7 +23,7 @@ public class Initializer {
     @Autowired
     Slave2Dao slave2Dao;
 
-    @Transactional
+//    @Transactional
     public void initialize() {
         Integer master = 0;
         Integer slave1 = 0;

@@ -1,26 +1,26 @@
 package com.sdp.poc.threading.db.manager.prodcons;
 
 import com.sdp.poc.threading.base.QObject;
-import com.sdp.poc.threading.base.otros.Operacion;
-import com.sdp.poc.threading.db.manager.core.CtxDBManager;
-import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;
+import com.sdp.poc.threading.db.manager.config.CtxDBManagerThread;
+import com.sdp.poc.threading.db.manager.core.QItem;
+import com.sdp.poc.threading.db.manager.loader.LoadMaster;
+import com.sdp.poc.threading.mtlatchdb.interfaces.IMTDBConsumer;
+import org.hibernate.Session;
 
-public class Consumer implements IMTConsumer {
-    CtxDBManager ctx;
-
+public class Consumer implements IMTDBConsumer {
+    CtxDBManagerThread ctx;
+    LoadMaster master;
     public Consumer() {
-        ctx = CtxDBManager.getInstance();
+        ctx = new CtxDBManagerThread();
+        master = new LoadMaster(ctx);
     }
 
     public void consumir(QObject msg) {
-//        System.out.println(Thread.currentThread().getName() + " - Recibe " + msg);
-
-        int row = Math.toIntExact(msg.id / 10000);
-        int col = Math.toIntExact(msg.id % 10000);
-        int val = 0;
-//        int[] r = m.getRow(row);
-//        int[] c = m.getCol(col);
-
-        // Ambas dimensiones son iguales (Si no chequear errores)
+        System.out.println(Thread.currentThread().getName() + " - Recibe " + msg.id);
+        QItem item = (QItem) msg.data;
+        master.load(item.getId());
     }
+
+    @Override
+    public Session getSession() { return ctx.getSession(); }
 }

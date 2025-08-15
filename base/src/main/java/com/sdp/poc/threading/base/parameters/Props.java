@@ -49,5 +49,11 @@ public class Props extends Properties {
         }
         return def;
     }
+    public String getString(String key) { return getString(key, null); }
+    public String getString(String key, String def) {
+        Object obj = get(key);
+        if (obj == null) return (def == null) ? null : def;
+        return (String) obj;
+    }
 
 }

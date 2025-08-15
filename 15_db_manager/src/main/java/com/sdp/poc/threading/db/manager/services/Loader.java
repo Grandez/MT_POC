@@ -1,17 +1,15 @@
 package com.sdp.poc.threading.db.manager.services;
 
 import com.sdp.poc.threading.database.dao.*;
-import com.sdp.poc.threading.db.manager.core.CtxDBManager;
+import com.sdp.poc.threading.db.manager.config.CtxDBManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+// import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
 
-@Service
+//@Service
 public class Loader {
     private CtxDBManager ctx = CtxDBManager.getInstance();
 
@@ -26,7 +24,7 @@ public class Loader {
     @Autowired
     Slave2Dao slave2Dao;
 
-    @Transactional
+//    @Transactional
     public void load() {
         Integer master = 0;
         Integer slave1 = 0;
@@ -39,9 +37,9 @@ public class Loader {
             getLastId();
 //            tx.begin();
             // em.joinTransaction();
-            master = masterDao.getLastId();
-            slave1 = slave1Dao.deleteAll();
-            slave2 = slave2Dao.deleteAll();
+//            master = masterDao.getLastId(ctx.);
+//            slave1 = slave1Dao.deleteAll();
+//            slave2 = slave2Dao.deleteAll();
 //            tx.commit();
         } catch (RuntimeException e) {
 //            if (tx.isActive()) tx.rollback();
@@ -61,14 +59,14 @@ public class Loader {
 //    }
 
     private Integer getLastId() {
-        int max = 0;
-        int act = masterDao.getLastId();
-        if (act > max) max = act;
-            act = slave1Dao.getLastId();
-        if (act > max) max = act;
-            act = slave2Dao.getLastId();
-        if (act > max) max = act;
-        return max;
+//        int max = 0;
+//        int act = masterDao.getLastId(ctx.);
+//        if (act > max) max = act;
+//            act = slave1Dao.getLastId();
+//        if (act > max) max = act;
+//            act = slave2Dao.getLastId();
+//        if (act > max) max = act;
+        return 0;
     }
 }
 /*

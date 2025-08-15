@@ -1,6 +1,6 @@
 package com.sdp.poc.threading.thread.prodcons;
 
-import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.config.CtxBase;
 import com.sdp.poc.threading.base.otros.Operacion;
 import com.sdp.poc.threading.base.system.Rand;
 import com.sdp.poc.threading.mtlatch.base.ThreadBase;

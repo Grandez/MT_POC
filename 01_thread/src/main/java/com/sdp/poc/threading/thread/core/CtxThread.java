@@ -4,7 +4,7 @@ package com.sdp.poc.threading.thread.core;
  * Extiende de CABase
  */
 
-import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.config.CtxBase;
 
 public class CtxThread extends CtxBase {
     private Integer items = 1000;

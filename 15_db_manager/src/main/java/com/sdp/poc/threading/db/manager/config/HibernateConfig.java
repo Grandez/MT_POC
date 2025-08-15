@@ -1,5 +1,5 @@
 package com.sdp.poc.threading.db.manager.config;
-
+/*
 import java.util.Properties;
 import javax.sql.DataSource;
 
@@ -62,3 +62,4 @@ public class HibernateConfig {
         return sf;
     }
 }
+*/

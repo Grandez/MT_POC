@@ -14,7 +14,7 @@ package com.sdp.poc.threading.mtlatch.core;
  *
  */
 
-import com.sdp.poc.threading.base.CtxBase;
+import com.sdp.poc.threading.base.config.CtxBase;
 import com.sdp.poc.threading.base.parameters.Props;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;
 import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
@@ -25,18 +25,19 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Motor {
-    ExecutorService executor = null;
-    CtxBase ctx;
-    long    beg;
-    QLoggerProd logger;
+    protected ExecutorService executor = null;
+    protected CtxBase ctx;
+    protected long    beg;
+    protected QLoggerProd logger;
 
-    public Motor()                          { this(null, null, null); }
-    public Motor(String file)               { this(file, null, null);    }
-    public Motor(String file, String label) {
-        this(file, label, null);
-    }
-    public Motor(CtxBase ca)                { this("NONE",null, ca);    }
-    public Motor(String file, CtxBase ca)   { this(file,null, ca);    }
+    // Constructores
+    public Motor()                           { this.ctx = null; }
+    public Motor(String file)                { this(file, null, null);    }
+    public Motor(String file, String label)  { this(file, label, null); }
+    public Motor(CtxBase ca)                 { this("NONE",null, ca);    }
+    public Motor(String file, CtxBase ca)    { this(file,null, ca);    }
+    public Motor(CtxBase ca, String file)    { this("application", null, ca);    }
+    public Motor(CtxBase ca, String file, String prfx)    { this(file,prfx, ca);    }
 
     /**
      * Constructor del motor de threading
@@ -44,10 +45,11 @@ public class Motor {
      * @param label   Prefijo de las entradas de configuracion
      * @param ctx     Parametros pasados por linea de comandos en la interfaz
      */
-    public Motor(String fConfig, String label, CtxBase ctx) {
+    protected Motor(String fConfig, String label, CtxBase ctx) {
         this.ctx = ctx;
-        loadPropsData(Props.load(getFileProperties(fConfig)), label);
+        loadPropsData(fConfig, label);
         loadPropsData(ctx.getCommandLine(), null);
+        ctx.setAppProps(Props.load(getFileProperties(fConfig)));
     }
 
     @SuppressWarnings("unchecked")
@@ -97,6 +99,9 @@ public class Motor {
         Thread thr = new Thread(new Timer(prod, ctx));
         thr.start();
         return thr;
+    }
+    private void loadPropsData(String fname, String prfx) {
+        loadPropsData(Props.load(getFileProperties(fname)), prfx);
     }
     private void loadPropsData(Props props, String prfx) {
         if (props == null) return;

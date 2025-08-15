@@ -4,46 +4,35 @@ import com.sdp.poc.threading.base.parameters.*;
 
 import com.sdp.poc.threading.base.logging.QLoggerProd;
 import com.sdp.poc.threading.db.manager.config.ACTION;
-import com.sdp.poc.threading.db.manager.core.CtxDBManager;
+import com.sdp.poc.threading.db.manager.config.CtxDBManager;
 import com.sdp.poc.threading.db.manager.prodcons.Consumer;
 import com.sdp.poc.threading.db.manager.prodcons.Producer;
 import com.sdp.poc.threading.db.manager.services.*;
-import com.sdp.poc.threading.mtlatch.base.MainMT;
+import com.sdp.poc.threading.mtlatchdb.base.MainDB;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.*;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static java.lang.System.out;
 
-@SpringBootApplication
-public class Main extends MainMT implements ApplicationRunner {
-    private CtxDBManager ctx = CtxDBManager.getInstance();
+public class Main extends MainDB { // implements ApplicationRunner {
+    private static CtxDBManager ctx = CtxDBManager.getInstance();
     private QLoggerProd logger;
 
-    @Autowired
+//    @Autowired
     Initializer initializer;
     @Autowired
     Loader loader;
 
-    public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
-    }
-
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-        run("dbmanager", ctx, args.getSourceArgs());
-    }
+    public static void main(String[] args) { (new Main()).run("dbmanager", ctx, args); }
 
     @Override
     protected void execute() {
         // Init y reset no son multihilo
         // Loader si
-        AnnotationConfigApplicationContext app = ctx.getEmf();
-        System.out.println(app.getApplicationName());
+//        AnnotationConfigApplicationContext app = ctx.getEmf();
+//        System.out.println(app.getApplicationName());
         try {
             switch (ctx.getAction()) {
                 case INIT: initializer.initialize(); break;
