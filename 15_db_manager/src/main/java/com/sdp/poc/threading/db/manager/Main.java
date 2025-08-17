@@ -2,14 +2,12 @@ package com.sdp.poc.threading.db.manager;
 
 import com.sdp.poc.threading.base.parameters.*;
 
-import com.sdp.poc.threading.base.logging.QLoggerProd;
 import com.sdp.poc.threading.db.manager.config.ACTION;
 import com.sdp.poc.threading.db.manager.config.CtxDBManager;
 import com.sdp.poc.threading.db.manager.prodcons.Consumer;
 import com.sdp.poc.threading.db.manager.prodcons.Producer;
 import com.sdp.poc.threading.db.manager.services.*;
 import com.sdp.poc.threading.mtlatchdb.base.MainDB;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +16,6 @@ import static java.lang.System.out;
 
 public class Main extends MainDB { // implements ApplicationRunner {
     private static CtxDBManager ctx = CtxDBManager.getInstance();
-    private QLoggerProd logger;
 
     Initializer initializer;
     Loader loader;
@@ -70,10 +67,12 @@ public class Main extends MainDB { // implements ApplicationRunner {
         out.println("POC para analisis de procesos multihilo");
         out.println("Utilidad para hacer las pruebas repetibles");
         out.println();
-        out.println("Uso: java -jar 15_db_manager.jar [-init | -reset | -load][--threads n][--timeout n][--rows n]");
+        out.println("Uso: java -jar 15_db_manager.jar [-init | -reset | -load | check]");
+        out.println("                                 [--threads n][--timeout n][--rows n]");
         out.println("\t   -init       - Inicializa las tablas destino");
         out.println("\t   -reset      - Inicializa la base de datos completa");
         out.println("\t   -load       - Inicializa las tablas origen");
+        out.println("\t   -check      - Verifica el estado de la base de datos");
         out.println("\t   --rows    n - Numero de registros a generar en miles");
         out.println("\t   --threads n - Numero de hilos");
         out.println("\t   --timeout n - Maximo tiempo elapsed en minutos");

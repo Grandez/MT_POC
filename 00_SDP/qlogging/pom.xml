@@ -4,19 +4,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.sdp.poc.threading</groupId>
-        <artifactId>MT_POC</artifactId>
+        <groupId>com.sdp</groupId>
+        <artifactId>base</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>MTLatch</artifactId>
+    <groupId>com.sdp.base</groupId>
+    <artifactId>qlogging</artifactId>
 
     <dependencies>
+
         <dependency>
-            <groupId>com.sdp.poc.threading</groupId>
-            <artifactId>qlogging</artifactId>
+            <groupId>com.sdp.base</groupId>
+            <artifactId>sal</artifactId>
             <version>${version.poc}</version>
         </dependency>
+
+        <!-- Hibernate ORM -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -20,7 +20,7 @@ public class Consumer implements IMTDBConsumer {
     }
 
     public void consumir(QObject msg) {
-        System.out.println(Thread.currentThread().getName() + " - Recibe " + msg.id);
+        // System.out.println(Thread.currentThread().getName() + " - Recibe " + msg.id);
         QItem item = (QItem) msg.data;
         master.load(item.getId());
     }

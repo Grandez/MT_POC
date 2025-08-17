@@ -6,7 +6,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class CtxDBManager extends CtxDB {
     private static CtxDBManager INSTANCE = null;
-    private int    rows   = 1;
+
+    private int    rows   = 100;
     private ACTION action = ACTION.INIT;
 
     static AnnotationConfigApplicationContext ctx = null;

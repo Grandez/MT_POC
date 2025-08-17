@@ -10,34 +10,18 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>base</module>
+        <module>00_SDP</module>
 
         <module>MTLatch</module>
         <module>MTLatchDB</module>
+        <module>MTLatchXA</module>
+
         <module>01_thread</module>
         <module>02_simple</module>
         <module>03_matrix</module>
         <module>10_database</module>
         <module>15_db_manager</module>
-        <module>99_sample</module>
-        <module>98_sample_base</module>
-        <!--
 
-                <module>MTFuture</module>
-                <module>MTLatchDB</module>
-
-
-
-
-                <module>11_mariadb</module>
-                <module>12_mysql</module>
-                <module>13_oracle</module>
-                <module>14_db2</module>
-
-                <module>16_db_thread</module>
-                <module>17_db_chunk</module>
-                <module>18_db_xa</module>
-        -->
 
     </modules>
 
@@ -45,11 +29,12 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.spring>5.3.39</version.spring>
+        <version.spring>5.3.27</version.spring>
         <version.hibernate>5.6.15.Final</version.hibernate>
         <version.spring.data>2.7.18</version.spring.data>
         <version.mariadb>2.7.11</version.mariadb>
         <version.log4j>2.17.2</version.log4j>
+        <version.atomikos>5.0.8</version.atomikos>
         <version.poc>1.0.0</version.poc>
     </properties>
 
@@ -70,6 +55,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
+                <version>${version.spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
                 <version>${version.spring}</version>
             </dependency>
 
@@ -94,6 +84,19 @@
                 <artifactId>commons-dbcp2</artifactId>
                 <version>2.9.0</version>
             </dependency>
+
+            <!-- Atomikos XA -->
+            <dependency>
+                <groupId>com.atomikos</groupId>
+                <artifactId>transactions-jta</artifactId>
+                <version>${version.atomikos}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.atomikos</groupId>
+                <artifactId>transactions-hibernate4</artifactId>
+                <version>${version.atomikos}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>com.sdp.poc.threading</groupId>

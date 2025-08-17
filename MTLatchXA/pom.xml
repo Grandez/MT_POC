@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>MTLatchDB</artifactId>
+    <artifactId>MTLatchXA</artifactId>
 
     <dependencies>
         <dependency>
@@ -45,6 +45,15 @@
             <artifactId>hibernate-core</artifactId>
         </dependency>
 
+        <!-- Atomikos XA -->
+        <dependency>
+            <groupId>com.atomikos</groupId>
+            <artifactId>transactions-jta</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.atomikos</groupId>
+            <artifactId>transactions-hibernate4</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

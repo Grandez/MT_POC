@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SAL - System Abstraction Layer
+Este paquete contiene metodos que abstraen del Sistema Operativo
+y utilidades de uso comun
+
+NO DEBE TENER NINGUNA DEPENDENCIA FUERA DEL LENGUAJE
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.sdp</groupId>
+        <artifactId>base</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>com.sdp.base</groupId>
+    <artifactId>sal</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.10.2</version>
+        </dependency>
+    </dependencies>
+
+
+</project>

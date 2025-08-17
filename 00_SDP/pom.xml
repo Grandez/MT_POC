@@ -9,14 +9,14 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>MTLatch</artifactId>
+    <groupId>com.sdp</groupId>
+    <artifactId>SDPParent</artifactId>
+    <packaging>pom</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.sdp.poc.threading</groupId>
-            <artifactId>qlogging</artifactId>
-            <version>${version.poc}</version>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>sal</module>
+        <module>qlogging</module>
+        <module>base</module>
+    </modules>
 
 </project>
