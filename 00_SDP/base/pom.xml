@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>com.sdp</groupId>
-        <artifactId>base</artifactId>
+        <artifactId>SDPParent</artifactId>
         <version>1.0.0</version>
     </parent>
 

@@ -16,6 +16,8 @@ public class Log {
     private Long pid;
     @Column(name="THREAD")
     private String thread;
+    @Column(name="FILE")
+    private String file;
     @Column(name="CLASS")
     private String cls;
     @Column(name="METHOD")
@@ -25,7 +27,7 @@ public class Log {
     @Column(name="MSG")
     private String msg;
     @Column(name="TYPE")
-    private Integer type;
+    private String type;
     @Column(name="BLOCK")
     private Integer block;
     @Column(name="CODE")
@@ -40,11 +42,12 @@ public class Log {
     public Long    getTms()     { return tms;    }
     public Long    getPid()     { return pid;    }
     public String  getThread()  { return thread; }
+    public String  getFile()    { return file;   }
     public String  getCls()     { return cls;    }
     public String  getMethod()  { return method; }
     public Integer getLine()    { return line;   }
     public String  getMsg()     { return msg;    }
-    public Integer getType()    { return type;   }
+    public String  getType()    { return type;   }
     public Integer getBlock()   { return block;  }
     public Integer getCode()    { return code;   }
     public String  getData()    { return data;   }
@@ -56,13 +59,14 @@ public class Log {
     public void setThread(String thread) {
         this.thread = thread;
     }
+    public void setFile  (String file)   { this.file = file;     }
     public void setCls   (String cls)    { this.cls = cls;       }
     public void setMethod(String method) {
         this.method = method;
     }
     public void setLine  (Integer line)  { this.line = line;    }
     public void setMsg   (String msg)    { this.msg = msg;      }
-    public void setType  (Integer type)  { this.type = type;    }
+    public void setType  (String type)   { this.type = type;    }
     public void setBlock (Integer block) { this.block = block;  }
     public void setCode  (Integer code)  { this.code = code;    }
     public void setData  (String data)   { this.data = data;    }

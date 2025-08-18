@@ -1,7 +1,7 @@
 package com.sdp.base.logging.loggers;
 
-
-import com.sdp.base.logging.system.CtxLogging;
+import com.sdp.base.logging.config.CtxQLog;
+import com.sdp.base.logging.objects.QObject;
 
 public class QLoggerThread extends QLoggerBase {
     private static Thread thrLog = null;
@@ -19,7 +19,7 @@ public class QLoggerThread extends QLoggerBase {
         // Controlar que ya este hecho
         if (thrLog == null) return;
         try {
-            qlog.put("end:" + Long.MAX_VALUE);
+            qlog.put(new QObject(Long.MAX_VALUE));
             thrLog.join();
         } catch (InterruptedException e) {
             System.err.println("DEV: QLog InterruptedException");
@@ -27,6 +27,6 @@ public class QLoggerThread extends QLoggerBase {
             thrLog = null;
         }
     }
-    public static QLoggerProd getLogger(CtxLogging ctx) { return new QLoggerProd(ctx); }
-    public static QLoggerProd getLogger()               { return new QLoggerProd();    }
+    public static QLoggerProd getLogger(CtxQLog ctx) { return new QLoggerProd(ctx); }
+    public static QLoggerProd getLogger()            { return new QLoggerProd();    }
 }

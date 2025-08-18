@@ -7,25 +7,28 @@ package com.sdp.base.logging.loggers;
 import com.sdp.base.logging.Logger;
 import com.sdp.base.logging.codes.MSGCODE;
 import com.sdp.base.logging.codes.OUT;
-import com.sdp.base.logging.system.CtxLogging;
-import com.sdp.sal.mask.RC;
+import com.sdp.base.logging.config.CtxQLog;
+import com.sdp.base.logging.objects.QLogMsg;
+import com.sdp.base.logging.objects.QObject;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class QLoggerProd extends QLoggerBase implements Logger {
-    CtxLogging ctx;
+    CtxQLog ctx;
+    private static long count = 0;
     // Calcula tiempos entre bloques
     Stack<Long>   tmsValue = new Stack<Long>();
     Stack<String> tmsLabel = new Stack<String>();
+
     int tgt = OUT.FILE;
 
-    public QLoggerProd()                       { this(OUT.FILE, new CtxLogging()); }
+    public QLoggerProd()                       { this(OUT.FILE, new CtxQLog()); }
     public QLoggerProd(Object ctx)             { this(OUT.FILE, ctx);           }
-    public QLoggerProd(int target)             { this(target, new CtxLogging());   }
+    public QLoggerProd(int target)             { this(target, new CtxQLog());   }
     public QLoggerProd(int target, Object ctx) {
         super();
-        this.ctx = (CtxLogging) ctx;
+        this.ctx = (CtxQLog) ctx;
         this.tgt = target;
         tmsValue.push(System.currentTimeMillis());
         tmsLabel.push("BEG");
@@ -109,9 +112,9 @@ public class QLoggerProd extends QLoggerBase implements Logger {
     }
     private void writeMessage(int stack, String code, Object ... parms) {
         int i;
-        StringBuffer head = mountHeader(code, stack);
+        QLogMsg msg = mountHeader(code, stack);
         StringBuffer buff = new StringBuffer();
-        buff.append(head);
+
         if (parms.length > 0) {
             for (i = 0; i < parms.length; i++) {
                 if (parms[i] instanceof Object[]) {
@@ -122,22 +125,39 @@ public class QLoggerProd extends QLoggerBase implements Logger {
                 }
             }
             buff.deleteCharAt(buff.length() - 1);
-        }
+        } else buff.append("");
+        msg.data = buff.toString();
 
         try {
-            qlog.put(buff.toString());
+            qlog.put(new QObject(++count,msg));
         } catch (Exception e) {
-            // Do nothing
-            System.err.println("Dev: check");
+            System.err.println("Dev: check"); // Do nothing
         }
 
+    }
+    private QLogMsg mountHeader(String code, int n) {
+        QLogMsg msg = new QLogMsg();
+        String clsName = this.getClass().getSimpleName();
+
+        msg.app    = ctx.getAppName();
+        msg.pid    = ctx.getPid();
+        msg.msg    = code;
+        msg.tms    = System.currentTimeMillis() / 1000;
+        msg.thread = Thread.currentThread().getName();
+        int idx = 0;
+
+        StackTraceElement[] stack = Thread.currentThread().getStackTrace();
+        for (idx = 1; idx < stack.length; idx++) if (!stack[idx].getClassName().contains(clsName)) break;
+        msg.source = stack[idx];
+
+        return msg;
     }
 
     /**
      * Monta la parte de cabecera del mensaje
      * @return el buffer con la cabecera
      */
-    private StringBuffer mountHeader(String code, int n) {
+    private StringBuffer mountHeader_string(String code, int n) {
         int idx = 0;
         String clsName = this.getClass().getSimpleName();
         StringBuffer buff = new StringBuffer(512);

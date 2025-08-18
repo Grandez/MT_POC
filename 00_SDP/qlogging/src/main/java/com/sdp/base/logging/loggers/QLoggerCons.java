@@ -5,9 +5,17 @@ package com.sdp.base.logging.loggers;
  * El proceso acabara cuando se reciba un mensaje tipo -1
  */
 
+import com.sdp.base.logging.config.DBConfig;
+import com.sdp.base.logging.entity.Log;
+import com.sdp.base.logging.objects.QLogMsg;
+import com.sdp.base.logging.objects.QObject;
 import com.sdp.sal.ctes.Color;
 import com.sdp.sal.files.MFiles;
 import com.sdp.sal.mask.Bit;
+import com.sdp.sal.system.PID;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,7 +23,9 @@ import java.io.FileWriter;
 import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class QLoggerCons extends QLoggerBase implements Runnable {
 
@@ -30,59 +40,100 @@ public class QLoggerCons extends QLoggerBase implements Runnable {
     BufferedWriter buff;
     FileWriter log;
 
-    public QLoggerCons()           {  }
-    public QLoggerCons(String app) { this.app   = app; }
+    private SessionFactory sessionFactory;
+    private Session session;
+    private List<Log> entities = new ArrayList<>();
+
+    public QLoggerCons()           { this("NONAME"); }
+    public QLoggerCons(String app) {
+        this.app   = app;
+        sessionFactory = DBConfig.buildSessionFactory();
+        session = sessionFactory.openSession();
+    }
     @Override
     public void run() {
+        int counter = 0;
         Thread.currentThread().setName("logger");
         openLogFile();
-        long mark = 1L;
 
         try {
             while (true) {
-                String msg = qlog.take();
-                String[] toks = msg.split(":");
-                mark = Long.parseLong(toks[1]);
-                if (mark < 0 || mark == Long.MAX_VALUE) break;
+                QObject msg = qlog.take();
+                if (msg.isLastMessage()) break;
+                write2file(msg.data);
+                write2db(msg.data);
 
-//                mark = checkConsole(mark);
-                write2log(msg);
-
-                // MSGTYPE type = new MSGTYPE((int) mark);
-//                int type = (int) mark;
-//
-//                String[] vars = Arrays.copyOfRange(toks, 2, toks.length);
-//                switch (type &  level) {
-//                    case 0x01: pout = System.err;
-//                               color = Color.RED_BOLD;
-//                               break;
-//                    case 0x02: color = Color.YELLOW_BOLD; break;
-//                    case 0x04: color = Color.BLUE_BOLD;   break;
-//                    case 0x08: color = Color.GREEN_BOLD;  break;
-//                    case 0x10: color = Color.BLACK_BOLD;  break;
-//                    case 0x20: color = Color.RESET;       break;
-//                    default: continue;
-//                }
-//                print(toks[1], vars);
+                // Transacciones por bloques
+                counter++;
+                if (counter % 50 == 0) counter = persistDB();
             }
+            persistDB();
         } catch (InterruptedException e) {
             // Por ahora simplemente cerramos el flujo
             System.err.println("Interrupcion del logger");
-            closeLogFile();
             Thread.currentThread().interrupt();
+        } finally {
+            closeConnections();
         }
-        closeLogFile();
+
     }
     private void print(String fmt, Object... args) {
         String msg = String.format(fmt, args);
         pout.println(color.getColor() + getPrfx() + msg + Color.RESET.getColor());
     }
-    private void write2log(String msg) {
+    private void write2file(Object obj) {
+        QLogMsg msg = (QLogMsg) obj;
         try {
             log.write(msg + "\n");
         } catch (Exception ex) {
             // Do nothing
         }
+    }
+    private void write2db(Object obj) {
+        QLogMsg msg = (QLogMsg) obj;
+        Log log = new Log();
+        log.setApp(msg.app);
+
+        log.setData(msg.data);
+
+        log.setMsg(msg.msg);
+
+        log.setPid(msg.pid);
+        log.setThread(msg.thread);
+        log.setTms(msg.tms);
+
+        log.setType(msg.msg.substring(0,3));
+        log.setBlock(Integer.parseInt(msg.msg.substring(3,5)));
+        log.setCode(Integer.parseInt(msg.msg.substring(5)));
+
+        log.setFile(msg.source.getFileName());
+        log.setCls(msg.source.getClassName());
+        log.setLine(msg.source.getLineNumber());
+        log.setMethod(msg.source.getMethodName());
+
+        log.setUuid(PID.uuid());
+
+        entities.add(log);
+    }
+
+    private int persistDB() {
+        Transaction tx = session.beginTransaction();
+
+        for (Log log : entities) {
+            try { session.save(log);
+            } catch (Exception e) {
+                // Chequear que el error es de la entidad y no otro
+                System.err.println("Error guardando entidad " + log.getUuid() + ": " + e.getMessage());
+                session.evict(log);
+            }
+        }
+        // Limpiar memoria
+        session.flush();
+        session.clear();
+
+        tx.commit();
+        entities = new ArrayList<>();
+        return 0;
     }
     private static String getPrfx() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -101,15 +152,17 @@ public class QLoggerCons extends QLoggerBase implements Runnable {
             System.err.println(e.getLocalizedMessage());
         };
     }
-    private void closeLogFile() {
+    private void closeConnections() {
         try {
             if (log != null)  log.close();
-//            if (buff != null) buff.close();
+            if (session != null) session.close();
+            if (sessionFactory != null) sessionFactory.close();
         } catch (Exception ex) {
             // Do nothing
         } finally {
             log = null;
-//            buff = null;
+            session = null;
+            sessionFactory = null;
         }
     }
     ///  Chequea si el mensaje se debe sacar por consola

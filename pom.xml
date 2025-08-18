@@ -11,30 +11,21 @@
 
     <modules>
         <module>00_SDP</module>
-
-        <module>MTLatch</module>
-        <module>MTLatchDB</module>
-        <module>MTLatchXA</module>
-
-        <module>01_thread</module>
-        <module>02_simple</module>
-        <module>03_matrix</module>
-        <module>10_database</module>
-        <module>15_db_manager</module>
-
-
+        <module>01_MT</module>
     </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Versiones -->
         <version.spring>5.3.27</version.spring>
         <version.hibernate>5.6.15.Final</version.hibernate>
         <version.spring.data>2.7.18</version.spring.data>
         <version.mariadb>2.7.11</version.mariadb>
         <version.log4j>2.17.2</version.log4j>
         <version.atomikos>5.0.8</version.atomikos>
+        <version.textng>7.1.0</version.textng>
         <version.poc>1.0.0</version.poc>
     </properties>
 
@@ -104,6 +95,12 @@
                 <version>${version.poc}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${version.testng}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

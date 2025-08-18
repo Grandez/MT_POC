@@ -53,11 +53,16 @@ public class PID {
     }
 
     public static String uuid() {
-        UUID uuid = UUID.randomUUID();
-        String numericUUID = Long.toString(uuid.getMostSignificantBits())
-                + Long.toString(uuid.getLeastSignificantBits());
-        // String lUUID = String.format("%040d", new BigInteger(UUID.randomUUID().toString().replace("-", ""), 16));
-        return numericUUID;
+//        UUID uuid = UUID.randomUUID();
+        return UUID.randomUUID().toString().replaceAll("-", "");
+//        String digits = "5231b533ba17478798a3f2df37de2aD7";
+//        String uuid = digits.replaceAll(
+//                "(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})",
+//                "$1-$2-$3-$4-$5");
+//        String numericUUID = Long.toString(uuid.getMostSignificantBits())
+//                + Long.toString(uuid.getLeastSignificantBits());
+//        // String lUUID = String.format("%040d", new BigInteger(UUID.randomUUID().toString().replace("-", ""), 16));
+//        return numericUUID;
     }
 
 }

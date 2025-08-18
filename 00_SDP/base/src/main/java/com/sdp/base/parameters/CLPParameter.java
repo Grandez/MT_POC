@@ -1,7 +1,5 @@
 package com.sdp.base.parameters;
 
-import com.sdp.poc.threading.base.parameters.CLP_TYPE;
-
 import java.util.Comparator;
 
 public class CLPParameter implements Comparator<String> {

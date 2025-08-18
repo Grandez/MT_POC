@@ -1,11 +1,15 @@
 package com.sdp.base.config;
 
+import com.sdp.base.logging.config.CtxQLog;
+import com.sdp.base.logging.objects.QObject;
+import com.sdp.base.logging.objects.QueueComparator;
 import com.sdp.base.parameters.Props;
 import com.sdp.sal.system.PID;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.PriorityBlockingQueue;
 
-public class CtxBase {
+public class CtxBase extends CtxQLog {
     private static CtxBase INSTANCE = null;
     private String appName = "NONAME";
     public  int    rc  = 0;
@@ -23,6 +27,7 @@ public class CtxBase {
     private int timeout = 0;
     private int chunk   = 1;
 
+    private static PriorityBlockingQueue<QObject> qdat = new PriorityBlockingQueue<>(50, new QueueComparator());
     private static CountDownLatch latch;
 
     // Parte Configuraciones
@@ -88,11 +93,9 @@ public class CtxBase {
     public Props getAppProps()               { return appProps;    }
 
     protected void  loadAppConfig()             { loadAppConfig("application"); }
-    protected void  loadAppConfig(String name)  {
-        appProps = Props.load(name + ".properties");
-    }
+    protected void  loadAppConfig(String name)  { appProps = Props.load(name + ".properties"); }
 
     public CountDownLatch                 getLatch() { return latch; }
     public void                           setLatch(CountDownLatch latch) { this.latch = latch; }
-
+    public PriorityBlockingQueue<QObject> getQueue() {return qdat; }
 }

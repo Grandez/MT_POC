@@ -1,4 +1,4 @@
-package com.sdp.poc.threading.base.otros;
+package com.sdp.base.otros;
 
 import java.util.Arrays;
 
