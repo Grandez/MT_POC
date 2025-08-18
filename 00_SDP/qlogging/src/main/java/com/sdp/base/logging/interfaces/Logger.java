@@ -1,4 +1,4 @@
-package com.sdp.base.logging;
+package com.sdp.base.logging.interfaces;
 
 import com.sdp.base.logging.codes.MSGCODE;
 
@@ -12,4 +12,7 @@ public interface Logger {
     void info (           MSGCODE grupo, MSGCODE item, Object... args);
     void info (           String msgcode, Object... args);
 
+    // Wrappers
+    void startApp();
+    void endApp  (App ctx);
 }

@@ -1,6 +1,7 @@
 package com.sdp.base.config;
 
 import com.sdp.base.logging.config.CtxQLog;
+import com.sdp.base.logging.interfaces.App;
 import com.sdp.base.logging.objects.QObject;
 import com.sdp.base.logging.objects.QueueComparator;
 import com.sdp.base.parameters.Props;
@@ -9,9 +10,9 @@ import com.sdp.sal.system.PID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.PriorityBlockingQueue;
 
-public class CtxBase extends CtxQLog {
+public class CtxBase extends CtxQLog implements App {
     private static CtxBase INSTANCE = null;
-    private String appName = "NONAME";
+
     public  int    rc  = 0;
 
     private Long    pid;
@@ -48,7 +49,6 @@ public class CtxBase extends CtxQLog {
     }
 
 
-    public String getAppName()  { return appName; }
     public int    getRC()       { return rc;      }
     public long   getPid()      { return pid;     }
     public long   getBeg()      { return beg;     }
@@ -66,8 +66,6 @@ public class CtxBase extends CtxQLog {
     public int getThreads()    { return threads; }
     public int getTimeout   () { return timeout; }
     public int getChunk     () { return chunk;   }
-
-    public void setAppName (String appName) { this.appName = appName; }
 
     public CtxBase() {
         this.pid = PID.getpid();

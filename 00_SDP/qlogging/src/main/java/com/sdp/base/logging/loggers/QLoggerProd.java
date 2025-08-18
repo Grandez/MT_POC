@@ -4,9 +4,9 @@
  */
 package com.sdp.base.logging.loggers;
 
-import com.sdp.base.logging.Logger;
-import com.sdp.base.logging.codes.MSGCODE;
-import com.sdp.base.logging.codes.OUT;
+import com.sdp.base.logging.interfaces.App;
+import com.sdp.base.logging.interfaces.Logger;
+import com.sdp.base.logging.codes.*;
 import com.sdp.base.logging.config.CtxQLog;
 import com.sdp.base.logging.objects.QLogMsg;
 import com.sdp.base.logging.objects.QObject;
@@ -175,5 +175,19 @@ public class QLoggerProd extends QLoggerBase implements Logger {
 
         buff.append(":").append(code).append(':');
         return buff;
+    }
+    /// ////////////////////////////////////////////////
+    // Wrappers
+    /// ////////////////////////////////////////////////
+
+    public void startApp() { info(2, MSG.msg(MSG.APP, BLOCK.EXEC, TYPE.START)); }
+    public void endApp(App ctx) {
+        int type = ctx.getTimeout() > 0 ? TYPE.ENDT : TYPE.END;
+        info(1, MSG.msg(MSG.APP, BLOCK.EXEC, type)
+                   ,System.currentTimeMillis() - ctx.getBeg()
+                   , ctx.getRC()
+                   , ctx.getInput(), ctx.getOutput(), ctx.getErrors()
+                   , ctx.getNumThreads(), ctx.getChunk(), ctx.getTimeout()
+           );
     }
 }

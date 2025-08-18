@@ -1,0 +1,3 @@
+cron en el host para renovar los certificados
+
+0 3 * * * docker-compose run --rm certbot renew && docker-compose exec nginx nginx -s reload

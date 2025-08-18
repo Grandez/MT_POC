@@ -36,6 +36,7 @@ public class CtxQLog {
     public void setWarningLevel(int level) { this.warningLevel = level; }
 
     public String getAppName()  { return appName; }
+    public void   setAppName(String appName )  { this.appName = appName; }
     public long   getPid()      { return pid;     }
 
 }

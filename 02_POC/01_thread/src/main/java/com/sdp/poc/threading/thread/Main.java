@@ -17,25 +17,7 @@ public class Main extends MainBase {
     private static CtxThread ctx = CtxThread.getInstance();
     private ExecutorService executor = null;
 
-    public static void main(String[] args) { (new Main()).run("simple", ctx, args, "NONE"); }
-    private int threading(int threads) {
-        try {
-            ctx.setLatch(new CountDownLatch(threads));
-            executor = Executors.newFixedThreadPool(threads);
-            for (int thread = 0; thread < threads; thread++) {
-                Consumer cons = new Consumer(ctx);
-                cons.run();
-            }
-            ctx.getLatch().await();
-        } catch (SecurityException se) {
-            ctx.rc |= RC.INTERRUPTED;
-            System.err.println("Control-c pulsado");
-        } catch (Exception se) {
-            ctx.rc |= RC.CRITICAL;
-            System.err.println(se.getLocalizedMessage());
-        }
-        return threads;
-    }
+    public static void main(String[] args) { (new Main()).run("thread", ctx, args, "NONE"); }
 
     /**
      * Mas que crear y destruir hilos
@@ -44,7 +26,7 @@ public class Main extends MainBase {
      */
     @Override
     protected void execute() {
-        for (int i = 0; i< ctx.getItems() * 1000; i += ctx.getNumThreads()) {
+        for (int i = 0; i< ctx.getItems(); i += ctx.getNumThreads()) {
             try {
                 int threads = ctx.getNumThreads(); // Sumamos el productor
                 ctx.setLatch(new CountDownLatch(threads));
@@ -71,7 +53,7 @@ public class Main extends MainBase {
         if (props.get("help") != null) showHelp();
         return props;
     }
-    protected void loadConfig() {
+    protected void loadConfiguration() {
         Props props = ctx.getCommandLine();
         ctx.setItems(props.getInteger("items", ctx.getItems()));
     }

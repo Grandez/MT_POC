@@ -1,7 +1,7 @@
 package com.sdp.base;
 
 import com.sdp.base.config.CtxBase;
-import com.sdp.base.logging.Logger;
+import com.sdp.base.logging.interfaces.Logger;
 import com.sdp.base.logging.QLogger;
 import com.sdp.base.logging.loggers.CLogger;
 import com.sdp.base.parameters.Props;
@@ -47,21 +47,14 @@ public abstract class MainBase {
 
         loadConfiguration();
 
-        // Todas las configuraciones deben estar cargadas
-        // antes de arrancar el logger
+        // Las configuraciones deben estar cargadas antes del logger
         QLogger.start(name);
         logger = QLogger.getLogger();
+        logger.startApp();
     }
 
     protected void appEnd() {
-        // Separamos las ejecuciones con timeout que las que no
-        // Desvituarian los analisis
-        String type = ctx.getTimeout() > 0 ? "SMR01000" : "SMR01001";
-        logger.info(0,type, System.currentTimeMillis() - ctx.getBeg()
-                , ctx.getRC()
-                , ctx.getInput(), ctx.getOutput(), ctx.getErrors()
-                , ctx.getNumThreads(), ctx.getChunk(), ctx.getTimeout()
-        );
+        logger.endApp(ctx);
         QLogger.stop();
         CLogger.info(String.format("RC: %2d - Elapsed: %s", ctx.getRC(),
                 Time.elapsed(System.currentTimeMillis() - ctx.getBeg(), true)));

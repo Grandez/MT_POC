@@ -16,5 +16,6 @@ public class Consumer implements Runnable {
         op.sumar(r.next(), r.next());
         op.multiplicar(r.next(), r.next());
         ctx.write();
+        ctx.getLatch().countDown();
     }
 }

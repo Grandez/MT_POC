@@ -1,16 +1,10 @@
 package com.sdp.base.logging.codes;
 
 public class MSG {
-    private final String code;
-    private final String fmt;
-    private final String desc;
+    public static String APP = "APP";
+    public static String TMR = "TMR";
 
-    MSG(String code, String fmt, String desc) {
-        this.code = code;
-        this.fmt = fmt;
-        this.desc = desc;
+    public static String msg(String msg, int block, int type) {
+        return String.format("%s%02d%03d", msg, block, type);
     }
-
-    public String getCode() { return code; }
-    public String getFormat() { return fmt; }
 }

@@ -32,8 +32,8 @@ public class Log {
     private Integer block;
     @Column(name="CODE")
     private Integer code;
-    @Column(name="DATA")
-    private String data;
+    @Column(name="BODY")
+    private String body;
     @Id
     @Column(name="UUID")
     private String uuid;
@@ -50,7 +50,7 @@ public class Log {
     public String  getType()    { return type;   }
     public Integer getBlock()   { return block;  }
     public Integer getCode()    { return code;   }
-    public String  getData()    { return data;   }
+    public String getBody()    { return body;   }
     public String  getUuid()    { return uuid;   }
 
     public void setApp   (String app)    { this.app = app; }
@@ -69,6 +69,6 @@ public class Log {
     public void setType  (String type)   { this.type = type;    }
     public void setBlock (Integer block) { this.block = block;  }
     public void setCode  (Integer code)  { this.code = code;    }
-    public void setData  (String data)   { this.data = data;    }
+    public void setBody(String body)   { this.body = body;    }
     public void setUuid  (String uuid)   { this.uuid = uuid;    }
 }

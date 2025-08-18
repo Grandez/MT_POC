@@ -1,5 +1,6 @@
 package com.sdp.base.logging;
 
+import com.sdp.base.logging.interfaces.Logger;
 import com.sdp.base.logging.loggers.QLoggerProd;
 import com.sdp.base.logging.loggers.QLoggerThread;
 

@@ -104,4 +104,16 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <!-- Base de datos de logging si DB -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sdp.base</groupId>
+            <artifactId>base</artifactId>
+        </dependency>
+
+    </dependencies>
 </project>

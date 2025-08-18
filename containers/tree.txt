@@ -1,0 +1,7 @@
+shiny-app/
+ ├─ app/
+ │   └─ app.R
+ │   └─ Dockerfile
+ ├─ nginx/
+ │   └─ nginx.conf
+ └─ docker-compose.yml

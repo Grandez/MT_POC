@@ -1,6 +1,6 @@
 package com.sdp.threading.mtlatchdb.core;
 
-import com.sdp.base.logging.Logger;
+import com.sdp.base.logging.interfaces.Logger;
 import com.sdp.base.logging.QLogger;
 import com.sdp.base.logging.codes.MSGCODE;
 import com.sdp.base.logging.loggers.CLogger;

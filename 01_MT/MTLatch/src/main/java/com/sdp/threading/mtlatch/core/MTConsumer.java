@@ -15,7 +15,6 @@ public class MTConsumer<Long> extends ThreadBase implements Runnable {
         super(ctx.getLatch());
         this.ctx = ctx;
         this.consumer = consumer;
-
     }
 
     @Override

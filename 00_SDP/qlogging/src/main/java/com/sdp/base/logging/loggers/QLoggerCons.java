@@ -94,7 +94,7 @@ public class QLoggerCons extends QLoggerBase implements Runnable {
         Log log = new Log();
         log.setApp(msg.app);
 
-        log.setData(msg.data);
+        log.setBody(msg.data);
 
         log.setMsg(msg.msg);
 
