@@ -19,6 +19,9 @@ Multiproyecto de soporte y analisis del manejo de hilos en Java
 - 02_POC Diferentes modelos para la realizacion del estudio
 - Containers - Dockerfiles para los recursos necesarios 
 
+## Requiere
+
 **MT_PARSER** Analizados basico de logs
+
 **MT_DOC**    Estudio 
 
