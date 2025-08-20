@@ -12,6 +12,7 @@
     <modules>
         <module>00_SDP</module>
         <module>01_MT</module>
+        <module>02_POC</module>
     </modules>
 
     <properties>
@@ -109,11 +110,15 @@
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
+            <version>${version.mariadb}</version>
         </dependency>
+<!--
         <dependency>
             <groupId>com.sdp.base</groupId>
             <artifactId>base</artifactId>
+            <version>${version.poc}</version>
         </dependency>
+-->
 
     </dependencies>
 </project>

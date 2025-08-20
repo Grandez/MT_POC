@@ -4,23 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.sdp.poc.threading</groupId>
-        <artifactId>MT_POC</artifactId>
+        <groupId>com.sdp.poc</groupId>
+        <artifactId>POC</artifactId>
         <version>1.0.0</version>
     </parent>
 
+    <groupId>com.sdp.poc.threading</groupId>
     <artifactId>03_matrix</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.sdp.poc.threading</groupId>
+            <groupId>com.sdp.base</groupId>
             <artifactId>base</artifactId>
             <version>${version.poc}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.sdp.poc.threading</groupId>
+            <groupId>com.sdp.threading</groupId>
             <artifactId>MTLatch</artifactId>
             <version>${version.poc}</version>
         </dependency>

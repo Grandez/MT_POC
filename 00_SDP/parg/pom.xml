@@ -5,26 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.sdp.poc.threading</groupId>
-        <artifactId>MT_POC</artifactId>
+        <groupId>com.sdp</groupId>
+        <artifactId>SDPParent</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <groupId>com.sdp.poc</groupId>
-    <artifactId>POC</artifactId>
+    <groupId>com.sdp.base</groupId>
+    <artifactId>parg</artifactId>
     <packaging>pom</packaging>
-
     <modules>
-        <module>01_thread</module>
-        <module>02_simple</module>
-        <module>03_matrix</module>
-        <module>10_database</module>
-
+        <module>client</module>
+        <module>server</module>
+        <module>core</module>
     </modules>
-
-    <dependencyManagement>
-        <dependencies>
-        </dependencies>
-    </dependencyManagement>
 
 </project>
