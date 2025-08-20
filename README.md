@@ -1,11 +1,15 @@
 # Java Multihilo
 
-Version: 1.x.x
+Multiproyecto de soporte y analisis del manejo de hilos en Java
 
-Un multiproyecto en Java 1.8 y Spring Core para dar soporte
-al estudio del manejo de hilos en Java
+## Versiones
 
-Se incluye:
+| Version | Descripcion              |
+|---------|--------------------------|
+| 1.x.x   | Java 1.8 con Spring Core |
+| 2.x.x   | Java 1.8 con Spring Boot |
+
+## Contenido
 
 - 00_SDP Un framework basico modelo para dar soporte al resto
 - 01_MT  Diferentes implementaciones operativas _out-of-the-box_ de manejo de hilos
