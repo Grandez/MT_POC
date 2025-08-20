@@ -4,7 +4,7 @@ Multiproyecto de soporte y analisis del manejo de hilos en Java
 
 ## Versiones
 
-| Version | Descripcion              |
+| Versión | Descripción              |
 |---------|--------------------------|
 | 1.x.x   | Java 1.8 con Spring Core |
 | 2.x.x   | Java 1.8 con Spring Boot |
@@ -23,5 +23,5 @@ Multiproyecto de soporte y analisis del manejo de hilos en Java
 
 **MT_PARSER** Analizados basico de logs
 
-**MT_DOC**    Estudio 
+**MT_DOC**    Estudio y documentación
 
