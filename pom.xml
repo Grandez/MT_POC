@@ -54,6 +54,11 @@
                 <artifactId>spring-tx</artifactId>
                 <version>${version.spring}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${version.spring}</version>
+            </dependency>
 
             <!-- Hibernate ORM -->
             <dependency>

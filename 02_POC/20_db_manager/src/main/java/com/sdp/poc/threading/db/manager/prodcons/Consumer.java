@@ -1,18 +1,16 @@
 package com.sdp.poc.threading.db.manager.prodcons;
 
-import com.sdp.poc.threading.base.QObject;
-import com.sdp.poc.threading.base.logging.Logger;
-import com.sdp.poc.threading.base.logging.QLogger;
+import com.sdp.base.logging.interfaces.Logger;
+import com.sdp.base.logging.objects.QObject;
 import com.sdp.poc.threading.db.manager.config.CtxDBManagerThread;
 import com.sdp.poc.threading.db.manager.core.QItem;
 import com.sdp.poc.threading.db.manager.loader.LoadMaster;
-import com.sdp.poc.threading.mtlatchdb.interfaces.IMTDBConsumer;
 import org.hibernate.Session;
 
 public class Consumer implements IMTDBConsumer {
     CtxDBManagerThread ctx;
     LoadMaster         master;
-    Logger            logger;
+    Logger logger;
     public Consumer() {
         ctx    = new CtxDBManagerThread();
         master = new LoadMaster(ctx);

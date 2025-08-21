@@ -15,19 +15,6 @@
     <packaging>jar</packaging>
 
     <dependencies>
-<!--
-        <dependency>
-            <groupId>com.sdp.poc.threading</groupId>
-            <artifactId>base</artifactId>
-            <version>${version.poc}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sdp.poc.threading</groupId>
-            <artifactId>MTLatch</artifactId>
-            <version>${version.poc}</version>
-        </dependency>
--->
         <!-- Database -->
         <dependency>
             <groupId>com.sdp.poc.threading</groupId>
@@ -37,7 +24,7 @@
         <dependency>
             <groupId>com.sdp.threading</groupId>
             <artifactId>MTLatchDB</artifactId>
-            <version>${version.poc}</version>
+            <version>1.0.0</version>
         </dependency>
         <!-- Spring Core + Context -->
         <dependency>
