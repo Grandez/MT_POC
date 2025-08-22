@@ -1,7 +1,6 @@
 package com.sdp.threading.mtlatchdb.core;
 
 import com.sdp.base.logging.interfaces.Logger;
-import com.sdp.base.logging.QLogger;
 import com.sdp.base.logging.codes.MSGCODE;
 import com.sdp.base.logging.loggers.CLogger;
 import com.sdp.base.logging.objects.QObject;
@@ -23,7 +22,7 @@ public class MTDBConsumer extends ThreadBase implements Runnable {
         super(ctx.getLatch());
         this.ctx      = ctx;
         this.consumer = consumer;
-        this.logger   = QLogger.getQLogger(ctx);
+//        this.logger   = QLogger.getQLogger(ctx);
     }
 
     @Override

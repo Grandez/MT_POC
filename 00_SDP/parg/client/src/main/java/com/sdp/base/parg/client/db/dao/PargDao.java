@@ -1,17 +1,30 @@
 package com.sdp.base.parg.client.db.dao;
 
+import com.sdp.base.parg.client.db.entity.Parg;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.*;
 
+@SuppressWarnings("unchecked")
 @Repository
 public class PargDao {
 
     @PersistenceContext
     private EntityManager em;
 
-
+    public List<Parg> getTable() {
+        List<Parg> data = new ArrayList<Parg>();
+        try {
+            Query<Parg> qry = (Query<Parg>) em.createQuery("FROM Parg");
+            data = qry.getResultList();
+        } catch (Exception ex) {
+            System.out.println("error");
+        }
+        return data;
+    }
     void metodoCursor() {
 //        Session session = sessionFactory.openSession();
 //        Transaction tx = session.beginTransaction();

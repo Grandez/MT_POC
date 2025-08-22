@@ -1,6 +1,7 @@
 package com.sdp.poc.threading.db.manager.config;
 
 import com.sdp.base.config.CtxBase;
+import com.sdp.threading.mtlatchdb.ICtxDB;
 import org.hibernate.Session;
 
 public class CtxDBManagerThread implements ICtxDB {

@@ -13,6 +13,14 @@
     <artifactId>01_thread</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.sdp.base</groupId>
+            <artifactId>base</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+    </dependencies>
     <build>
         <plugins>
             <plugin>

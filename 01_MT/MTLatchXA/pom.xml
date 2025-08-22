@@ -11,12 +11,12 @@
     </parent>
 
     <groupId>com.sdp.threading</groupId>
-    <artifactId>MTLatchDB</artifactId>
+    <artifactId>MTLatchXA</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.sdp.threading</groupId>
-            <artifactId>MTLatch</artifactId>
+            <artifactId>MTLatchDB</artifactId>
             <version>${version.poc}</version>
         </dependency>
 

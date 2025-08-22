@@ -19,6 +19,7 @@
         <module>02_simple</module>
         <module>03_matrix</module>
         <module>10_database</module>
+        <module>50_parg_client</module>
 
     </modules>
 

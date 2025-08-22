@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+@SuppressWarnings("unchecked")
 public class CtxDB extends CtxBase {
      private static CtxDB INSTANCE = null;
      public static AnnotationConfigApplicationContext context;

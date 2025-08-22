@@ -1,9 +1,12 @@
-package com.sdp.base.parg.client.db.entity;
+package com.sdp.base.parg.core.components;
 /**
  * Entidad de SOLO LECTURA
  */
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "PARG")

@@ -1,20 +1,20 @@
 package com.sdp.poc.threading.db.manager.prodcons;
 
-import com.sdp.poc.threading.base.QObject;
-import com.sdp.poc.threading.base.system.Rand;
+import com.sdp.base.logging.objects.QObject;
 import com.sdp.poc.threading.database.dao.Slave1Dao;
 import com.sdp.poc.threading.database.dao.Slave2Dao;
 import com.sdp.poc.threading.db.manager.config.CtxDBManagerThread;
 import com.sdp.poc.threading.db.manager.core.QItem;
-import com.sdp.poc.threading.mtlatch.interfaces.IMTProducer;
 import com.sdp.poc.threading.database.dao.MasterDao;
+import com.sdp.sal.system.Rand;
+import com.sdp.threading.mtlatch.interfaces.IMTProducer;
 import org.hibernate.Session;
 
 public class Producer implements IMTProducer {
     CtxDBManagerThread ctx;
     Session session;
     long    id;
-    Rand    rnd;
+    Rand rnd;
 
     long rows    = 100000;
     long current =      0;

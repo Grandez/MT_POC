@@ -1,8 +1,8 @@
 package com.sdp.poc.threading.db.manager.loader;
 
-import com.sdp.poc.threading.base.system.Rand;
 import com.sdp.poc.threading.database.entity.Master;
 import com.sdp.poc.threading.db.manager.config.CtxDBManagerThread;
+import com.sdp.sal.system.Rand;
 import org.hibernate.Session;
 
 import java.math.BigDecimal;

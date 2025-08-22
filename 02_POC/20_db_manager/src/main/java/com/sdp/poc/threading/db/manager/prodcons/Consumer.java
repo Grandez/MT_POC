@@ -5,6 +5,7 @@ import com.sdp.base.logging.objects.QObject;
 import com.sdp.poc.threading.db.manager.config.CtxDBManagerThread;
 import com.sdp.poc.threading.db.manager.core.QItem;
 import com.sdp.poc.threading.db.manager.loader.LoadMaster;
+import com.sdp.threading.mtlatchdb.interfaces.IMTDBConsumer;
 import org.hibernate.Session;
 
 public class Consumer implements IMTDBConsumer {

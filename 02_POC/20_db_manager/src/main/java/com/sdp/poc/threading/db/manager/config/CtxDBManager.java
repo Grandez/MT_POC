@@ -1,5 +1,7 @@
 package com.sdp.poc.threading.db.manager.config;
 
+import com.sdp.base.config.CtxDB;
+import com.sdp.threading.mtlatchdb.config.MTLatchDBConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class CtxDBManager extends CtxDB {

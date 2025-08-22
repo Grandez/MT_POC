@@ -1,10 +1,10 @@
 package com.sdp.poc.threading.matrix.prodcons;
 
-import com.sdp.poc.threading.base.QObject;
-import com.sdp.poc.threading.base.otros.Operacion;
+import com.sdp.base.logging.objects.QObject;
+import com.sdp.base.otros.Operacion;
 import com.sdp.poc.threading.matrix.core.CtxMatrix;
 import com.sdp.poc.threading.matrix.core.Matrix;
-import com.sdp.poc.threading.mtlatch.interfaces.IMTConsumer;
+import com.sdp.threading.mtlatch.interfaces.IMTConsumer;
 
 public class Consumer implements IMTConsumer {
     CtxMatrix ctx;

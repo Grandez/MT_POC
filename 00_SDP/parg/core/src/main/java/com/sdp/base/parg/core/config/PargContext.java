@@ -2,6 +2,7 @@ package com.sdp.base.parg.core.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.*;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -15,10 +16,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/*
 @Configuration
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:pargclient.properties")
 @EnableTransactionManagement
-public class AppContext {
+public class PargContext {
 
     @Value("${db.driver}") private String dbDriver;
     @Value("${db.url}") private String dbUrl;
@@ -47,7 +49,7 @@ public class AppContext {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource());
-        emf.setPackagesToScan(packagesToScan);
+        emf.setPackagesToScan(packagesToScan.split(","));
 
         JpaVendorAdapter vendorAdapter = new org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter();
         emf.setJpaVendorAdapter(vendorAdapter);
@@ -68,13 +70,15 @@ public class AppContext {
     }
 
     // --- Dynamic ComponentScan ---
-    @Bean
-    public static BeanFactoryPostProcessor beanFactoryPostProcessor(
-            @Value("${spring.packages.scan}") String basePackage) {
-        return beanFactory -> {
-            ClassPathBeanDefinitionScanner scanner =
-                    new ClassPathBeanDefinitionScanner((BeanDefinitionRegistry) beanFactory);
-            scanner.scan(basePackage);
-        };
-    }
+//    @Bean
+//    public static BeanFactoryPostProcessor beanFactoryPostProcessor(
+//            @Value("${spring.packages.scan}") String basePackage) {
+//        ConfigurableListableBeanFactory factory
+//        return beanFactory -> {
+//            ClassPathBeanDefinitionScanner scanner =
+//                    new ClassPathBeanDefinitionScanner((BeanDefinitionRegistry) beanFactory);
+//            scanner.scan(basePackage);
+//        };
+//    }
 }
+*/

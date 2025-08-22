@@ -181,3 +181,5 @@ fabric.properties
 .idea/**/markdown-navigator/
 
 **/target
+
+**/dependency-reduced-pom.xml

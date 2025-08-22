@@ -1,18 +1,18 @@
 package com.sdp.poc.threading.matrix;
 
-import com.sdp.poc.threading.base.mask.RC;
-import com.sdp.poc.threading.base.parameters.CLP;
-import com.sdp.poc.threading.base.parameters.CLP_Parameter;
-import com.sdp.poc.threading.base.parameters.CLP_TYPE;
-import com.sdp.poc.threading.base.parameters.Props;
-import com.sdp.poc.threading.base.logging.QLoggerProd;
+import com.sdp.base.logging.loggers.QLoggerProd;
+import com.sdp.base.parameters.CLP;
+import com.sdp.base.parameters.CLPParameter;
+import com.sdp.base.parameters.CLPType;
+import com.sdp.base.parameters.Props;
 import com.sdp.poc.threading.matrix.core.CtxMatrix;
 import com.sdp.poc.threading.matrix.core.Matrix;
 import com.sdp.poc.threading.matrix.core.TYPES;
 import com.sdp.poc.threading.matrix.prodcons.Consumer;
 import com.sdp.poc.threading.matrix.prodcons.Productor;
 import com.sdp.poc.threading.matrix.tools.MatrixBuilder;
-import com.sdp.poc.threading.mtlatch.base.MainMT;
+import com.sdp.sal.mask.RC;
+import com.sdp.threading.mtlatch.base.MainMT;
 
 import java.util.*;
 
@@ -50,11 +50,11 @@ public class Main extends MainMT {
 
     @Override
     protected Props parseParms(String[] args) {
-        Map<String, CLP_Parameter> options = new HashMap<>();
+        Map<String, CLPParameter> options = new HashMap<>();
 
-        options.put("threads", new CLP_Parameter("threads", "threads", CLP_TYPE.PINT));
-        options.put("timeout", new CLP_Parameter("timeout", "timeout", CLP_TYPE.PINT));
-        options.put("rows",    new CLP_Parameter("rows", "rows", CLP_TYPE.PINT));
+        options.put("threads", new CLPParameter("threads", "threads", CLPType.PINT));
+        options.put("timeout", new CLPParameter("timeout", "timeout", CLPType.PINT));
+        options.put("rows",    new CLPParameter("rows", "rows", CLPType.PINT));
 
         Props props = CLP.parseParms(args, options);
         if (props.get("help") != null) showHelp();
@@ -62,7 +62,7 @@ public class Main extends MainMT {
     }
 
     @Override
-    protected void loadConfig() {
+    protected void loadConfiguration() {
         // No hay fichero de propiedades. solo linea de comandos
         Props props = ctx.getCommandLine();
         ctx.setRows(props.getInteger("rows", ctx.getRows()));
